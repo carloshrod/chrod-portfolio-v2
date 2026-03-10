@@ -1,0 +1,29 @@
+---
+export interface Props {
+  name: string;
+  iconPath?: string;
+  iconColor?: string;
+}
+
+const { name, iconPath, iconColor } = Astro.props;
+---
+
+<span
+  class="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3.5 py-2 text-sm font-medium text-slate-300 transition-all hover:border-red-600/40 hover:text-slate-100"
+>
+  {
+    iconPath && (
+      <svg
+        role="img"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-4 w-4 shrink-0"
+        style={`fill: #${iconColor ?? "e2e8f0"};`}
+        aria-hidden="true"
+      >
+        <path d={iconPath} />
+      </svg>
+    )
+  }
+  {name}
+</span>
