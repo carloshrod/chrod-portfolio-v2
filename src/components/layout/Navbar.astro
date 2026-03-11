@@ -33,7 +33,8 @@ const navLinks = [
             <li>
               <a
                 href={link.href}
-                class="text-sm font-medium text-slate-400 transition-colors hover:text-red-400"
+                data-nav-link={link.href}
+                class="nav-link text-sm font-medium text-slate-400 transition-colors hover:text-red-400"
               >
                 {link.label}
               </a>
@@ -161,4 +162,53 @@ const navLinks = [
       toggle?.setAttribute("aria-expanded", "false");
     });
   });
+
+  // Active section highlighting
+  const navLinks =
+    document.querySelectorAll<HTMLAnchorElement>("a[data-nav-link]");
+  const sectionIds = Array.from(navLinks).map((a) =>
+    a.getAttribute("data-nav-link")!.replace("#", ""),
+  );
+  const sections = sectionIds
+    .map((id) => document.getElementById(id))
+    .filter(Boolean) as HTMLElement[];
+
+  const visibleSections = new Map<string, boolean>();
+  sections.forEach((s) => visibleSections.set(s.id, false));
+
+  function updateActive() {
+    let activeId: string | null = null;
+    let minTop = Infinity;
+
+    visibleSections.forEach((isVisible, id) => {
+      if (isVisible) {
+        const top = Math.abs(
+          document.getElementById(id)!.getBoundingClientRect().top,
+        );
+        if (top < minTop) {
+          minTop = top;
+          activeId = id;
+        }
+      }
+    });
+
+    navLinks.forEach((a) => {
+      const isActive =
+        activeId !== null && a.getAttribute("data-nav-link") === `#${activeId}`;
+      a.classList.toggle("text-red-400", isActive);
+      a.classList.toggle("text-slate-400", !isActive);
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) =>
+        visibleSections.set(entry.target.id, entry.isIntersecting),
+      );
+      updateActive();
+    },
+    { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+  );
+
+  sections.forEach((s) => observer.observe(s));
 </script>
