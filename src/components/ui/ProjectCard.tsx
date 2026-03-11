@@ -20,19 +20,29 @@ export function ProjectCard({ project, onClick }: Props) {
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-600/15 text-red-400">
           <CodeIcon />
         </div>
-        <div className="flex gap-1.5">
-          {project.githubUrl && (
+        <div className="flex items-center gap-1.5">
+          {(project.githubRepos ?? []).map((repo, i) => (
             <a
-              href={project.githubUrl}
+              key={i}
+              href={repo.url}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              aria-label={`${project.title} GitHub repository`}
-              className="rounded-md p-1.5 text-slate-500 transition-colors hover:text-slate-300"
+              aria-label={
+                repo.label
+                  ? `${project.title} ${repo.label} repository`
+                  : `${project.title} GitHub repository`
+              }
+              className="inline-flex items-center gap-1 rounded-md px-1.5 py-1 text-slate-500 transition-colors hover:text-slate-300"
             >
               <GithubIcon />
+              {repo.label && (
+                <span className="text-[10px] font-medium leading-none">
+                  {repo.label}
+                </span>
+              )}
             </a>
-          )}
+          ))}
           {project.liveUrl && (
             <a
               href={project.liveUrl}

@@ -144,19 +144,21 @@ const ProjectModal = ({ project, onClose }: Props) => {
         </div>
 
         {/* Links */}
-        {(project.githubUrl || project.liveUrl) && (
+        {((project.githubRepos && project.githubRepos.length > 0) ||
+          project.liveUrl) && (
           <div className="flex flex-wrap gap-3">
-            {project.githubUrl && (
+            {(project.githubRepos ?? []).map((repo, i) => (
               <a
-                href={project.githubUrl}
+                key={i}
+                href={repo.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#111] px-4 py-2.5 text-sm font-medium text-slate-300 ring-1 ring-[#222] transition-colors hover:bg-[#161616] hover:text-slate-100"
               >
                 <GithubIcon />
-                View on GitHub
+                {repo.label ?? "View on GitHub"}
               </a>
-            )}
+            ))}
             {project.liveUrl && (
               <a
                 href={project.liveUrl}

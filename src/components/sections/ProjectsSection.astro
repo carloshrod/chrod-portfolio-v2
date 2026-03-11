@@ -10,7 +10,10 @@ const projects = [
     longDescription:
       "A production-ready full-stack web application built with React on the frontend and Node.js with Express on the backend. It implements JWT-based authentication with refresh token rotation, real-time data sync via WebSockets, role-based access control, and a responsive modern UI built with TypeScript and Tailwind CSS. The PostgreSQL database uses optimized queries and connection pooling for high throughput.",
     technologies: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    githubUrl: "https://github.com",
+    githubRepos: [
+      { url: "https://github.com", label: "Frontend" },
+      { url: "https://github.com", label: "Backend" },
+    ],
     liveUrl: "https://example.com",
     screenshots: [],
   },
@@ -21,7 +24,7 @@ const projects = [
     longDescription:
       "A fully-featured e-commerce platform built with Next.js App Router and Stripe for payment processing. The platform supports product catalog management, a persistent shopping cart, secure checkout with Stripe Elements, order history, and an admin dashboard. MongoDB Atlas handles product and order data with Mongoose schemas, while Tailwind CSS ensures a polished, responsive storefront.",
     technologies: ["Next.js", "Tailwind CSS", "Stripe", "MongoDB"],
-    githubUrl: "https://github.com",
+    githubRepos: [{ url: "https://github.com" }],
     liveUrl: "https://example.com",
     screenshots: [],
   },
@@ -32,7 +35,7 @@ const projects = [
     longDescription:
       "A scalable RESTful API developed with Express and TypeScript following clean architecture principles. It covers full CRUD operations across multiple resources, request validation with Zod, JWT authentication and authorization middleware, rate limiting, and structured error handling. The MySQL database is managed with Prisma ORM, and the project includes comprehensive integration tests written with Jest and Supertest.",
     technologies: ["Express", "TypeScript", "MySQL", "JWT"],
-    githubUrl: "https://github.com",
+    githubRepos: [{ url: "https://github.com" }],
     screenshots: [],
   },
   {
@@ -42,7 +45,10 @@ const projects = [
     longDescription:
       "A real-time analytics dashboard powered by React and Firebase Realtime Database. Data updates are streamed live to all connected clients without page refreshes. The dashboard features interactive charts built with Recharts, push notifications via Firebase Cloud Messaging, user presence indicators, and a dark-themed Material UI layout. Authentication is handled through Firebase Auth with Google OAuth support.",
     technologies: ["React", "Firebase", "Material UI", "Recharts"],
-    githubUrl: "https://github.com",
+    githubRepos: [
+      { url: "https://github.com", label: "Frontend" },
+      { url: "https://github.com", label: "Backend" },
+    ],
     liveUrl: "https://example.com",
     screenshots: [],
   },
@@ -53,7 +59,7 @@ const projects = [
     longDescription:
       "A headless-first component library containing 30+ accessible UI primitives built with Astro and Tailwind CSS. Each component follows WAI-ARIA patterns and is fully keyboard navigable. The library is documented with Storybook, includes visual regression tests with Chromatic, ships TypeScript types, and is distributed as a package on npm with both ESM and CJS outputs.",
     technologies: ["Astro", "Tailwind CSS", "TypeScript", "Storybook"],
-    githubUrl: "https://github.com",
+    githubRepos: [{ url: "https://github.com" }],
     screenshots: [],
   },
   {
@@ -63,7 +69,7 @@ const projects = [
     longDescription:
       "A performant portfolio and blog starter built with Astro and MDX. Content is authored in Markdown with frontmatter-driven metadata, while Astro's static rendering ensures near-perfect Lighthouse scores. Features include automatic OG image generation, an RSS feed, dark/light mode toggle, category filtering, and one-click deployment to Vercel. SCSS modules provide scoped styling where Tailwind utilities fall short.",
     technologies: ["Astro", "SCSS", "MDX", "Vercel"],
-    githubUrl: "https://github.com",
+    githubRepos: [{ url: "https://github.com" }],
     liveUrl: "https://example.com",
     screenshots: [],
   },
@@ -82,8 +88,8 @@ const projects = [
         Selected Projects
       </h2>
       <p class="mx-auto mt-4 max-w-xl text-slate-400">
-        A collection of projects I've built — from full-stack apps to UI
-        libraries and developer tools.
+        A collection of projects I've built — from simple static sites, through
+        dashboards and e-commerce platforms, to full-stack apps.
       </p>
     </div>
 
