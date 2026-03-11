@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 type FormState = { name: string; email: string; message: string };
 type Status = "idle" | "sending" | "sent" | "error";
 
-export default function ContactDrawer() {
+const ContactDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState<FormState>({
     name: "",
@@ -53,7 +53,7 @@ export default function ContactDrawer() {
       <div
         aria-hidden="true"
         onClick={close}
-        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 z-60 bg-black/60 backdrop-blur-md transition-opacity duration-300 ${
           isOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -65,13 +65,22 @@ export default function ContactDrawer() {
         role="dialog"
         aria-modal="true"
         aria-label="Contact form"
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col bg-[#0e0e1a] shadow-2xl transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 z-70 flex w-full max-w-md flex-col bg-[#0e0e1a] shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-6 py-4">
-          <h2 className="text-lg font-semibold text-slate-100">Get in touch</h2>
+          <div className="flex items-center gap-3">
+            <img
+              src="/chrod-logo.png"
+              alt="chrod logo"
+              className="h-8 w-auto"
+            />
+            <h2 className="text-lg font-semibold text-slate-100">
+              Get in touch
+            </h2>
+          </div>
           <button
             onClick={close}
             aria-label="Close contact form"
@@ -148,7 +157,7 @@ export default function ContactDrawer() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Your name"
-                  className="w-full rounded-lg border border-border bg-[#171717] px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
+                  className="w-full rounded-lg border border-border bg-surface-alt px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
                 />
               </div>
 
@@ -168,7 +177,7 @@ export default function ContactDrawer() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="your@email.com"
-                  className="w-full rounded-lg border border-border bg-[#171717] px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
+                  className="w-full rounded-lg border border-border bg-surface-alt px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
                 />
               </div>
 
@@ -187,7 +196,7 @@ export default function ContactDrawer() {
                   value={form.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project or idea…"
-                  className="w-full resize-none rounded-lg border border-border bg-[#171717] px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
+                  className="w-full resize-none rounded-lg border border-border bg-surface-alt px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
                 />
               </div>
 
@@ -210,4 +219,6 @@ export default function ContactDrawer() {
       </div>
     </>
   );
-}
+};
+
+export default ContactDrawer;
