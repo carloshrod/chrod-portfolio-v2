@@ -11,11 +11,11 @@ const { title, description, technologies, githubUrl, liveUrl } = Astro.props;
 ---
 
 <article
-  class="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-[#101010] p-6 transition-all hover:border-red-600/40 hover:shadow-xl hover:shadow-red-900/10"
+  class="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all hover:border-red-600/40 hover:shadow-xl hover:shadow-red-900/10"
 >
   <!-- Top glow on hover -->
   <div
-    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to from-transparent via-red-500/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
   >
   </div>
 
