@@ -68,6 +68,7 @@ npm run preview   # Preview production build locally
 - **Tailwind CSS 4** — use utility classes directly in markup.
 - Avoid custom CSS unless strictly necessary.
 - Keep components small and reusable.
+- Use arrow functions for React components.
 
 ---
 
