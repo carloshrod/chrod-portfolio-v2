@@ -1,0 +1,103 @@
+---
+import Container from "../layout/Container.astro";
+import ReviewsCarousel from "../ui/ReviewsCarousel.tsx";
+
+const reviews = [
+  {
+    name: "Sarah Mitchell",
+    role: "Product Manager",
+    company: "TechFlow Inc.",
+    avatar: "SM",
+    rating: 5,
+    text: "Christian delivered an exceptional job. The product was built fast, the code was clean, and he communicated proactively throughout the whole process. Highly recommended!",
+    linkedinUrl: "https://linkedin.com",
+    source: "workana",
+    sourceUrl:
+      "https://www.workana.com/freelancer/29d6238ace2e92ebdcddbed3f81cab76",
+  },
+  {
+    name: "Alejandro Torres",
+    role: "Founder",
+    company: "Nova Studio",
+    avatar: "AT",
+    rating: 5,
+    text: "Working with Christian was a pleasure. He understood our vision immediately and translated it into a beautiful, performant web application. We'll definitely work together again.",
+    source: "direct",
+  },
+  {
+    name: "Emily Zhao",
+    role: "CTO",
+    company: "Stackly",
+    avatar: "EZ",
+    rating: 5,
+    text: "Impressive technical depth and attention to detail. Christian is one of those developers who actually reads the design specs carefully and follows best practices without being asked.",
+    linkedinUrl: "https://linkedin.com",
+    source: "workana",
+    sourceUrl:
+      "https://www.workana.com/freelancer/29d6238ace2e92ebdcddbed3f81cab76",
+  },
+  {
+    name: "Lucas Ferreira",
+    role: "Lead Designer",
+    company: "Pixel & Co.",
+    avatar: "LF",
+    rating: 5,
+    text: "As a designer, I appreciate developers who respect pixel-perfect implementations. Christian nailed every detail, and also brought useful suggestions to improve UX.",
+    source: "direct",
+  },
+  {
+    name: "Dana Park",
+    role: "Marketing Director",
+    company: "GrowthLoop",
+    avatar: "DP",
+    rating: 5,
+    text: "We hired Christian to rebuild our landing page and the results were outstanding. Conversion rate went up 40% and the page loads in under a second. Exceptional work.",
+    linkedinUrl: "https://linkedin.com",
+    source: "workana",
+  },
+  {
+    name: "Marco Bianchi",
+    role: "Software Engineer",
+    company: "DeepLogic",
+    avatar: "MB",
+    rating: 5,
+    text: "I collaborated with Christian on a complex dashboard project. His React and TypeScript skills are top-notch and he's also great at mentoring junior devs on the team.",
+    source: "direct",
+  },
+] as const;
+---
+
+<section id="reviews" class="bg-[#0d0d0d] py-24 overflow-hidden">
+  <Container>
+    <div class="mb-14 text-center">
+      <p
+        class="mb-3 text-sm font-semibold uppercase tracking-widest text-red-400"
+      >
+        Testimonials
+      </p>
+      <h2 class="text-3xl font-bold text-slate-100 sm:text-4xl">
+        What clients say
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-slate-400">
+        Feedback from people I've had the pleasure of working with.
+      </p>
+    </div>
+  </Container>
+
+  <!-- Carousel spans full width, outside the container -->
+  <div class="relative mt-4">
+    <!-- Fade edges -->
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-linear-to-r from-[#0d0d0d] to-transparent"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-linear-to-l from-[#0d0d0d] to-transparent"
+    >
+    </div>
+
+    <div class="px-6">
+      <ReviewsCarousel reviews={reviews} client:visible />
+    </div>
+  </div>
+</section>
