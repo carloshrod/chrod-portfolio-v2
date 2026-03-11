@@ -17,13 +17,27 @@ const year = new Date().getFullYear();
         />
       </a>
 
-      <p class="text-sm text-slate-600">
-        &copy; {year} chrod. All rights reserved.
-      </p>
+      <div
+        class="flex flex-col items-center gap-1.5 text-center sm:items-start"
+      >
+        <p class="text-sm text-slate-600">
+          &copy; {year} chrod. All rights reserved.
+        </p>
+        <div class="flex items-center gap-3 text-xs text-slate-700">
+          <a
+            href="/privacy-policy"
+            class="transition-colors hover:text-slate-400">Privacy Policy</a
+          >
+          <span aria-hidden="true">·</span>
+          <a href="/terms" class="transition-colors hover:text-slate-400"
+            >Terms & Conditions</a
+          >
+        </div>
+      </div>
 
       <div class="flex items-center gap-5">
         <a
-          href="https://github.com"
+          href="https://github.com/carloshrod"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
@@ -42,7 +56,7 @@ const year = new Date().getFullYear();
           </svg>
         </a>
         <a
-          href="https://linkedin.com"
+          href="https://www.linkedin.com/in/chrod"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
