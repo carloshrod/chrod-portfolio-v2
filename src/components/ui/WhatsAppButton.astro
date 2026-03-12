@@ -7,6 +7,7 @@ const t = useTranslations(lang);
 ---
 
 <a
+  id="whatsapp-btn"
   href="https://wa.me/573127600792"
   target="_blank"
   rel="noopener noreferrer"
@@ -27,3 +28,60 @@ const t = useTranslations(lang);
     ></path>
   </svg>
 </a>
+
+<style>
+  @keyframes wa-wiggle {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    20% {
+      transform: scale(1.28) rotate(-8deg);
+    }
+    40% {
+      transform: scale(1.28) rotate(8deg);
+    }
+    60% {
+      transform: scale(1.18) rotate(-5deg);
+    }
+    80% {
+      transform: scale(1.18) rotate(5deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  .wa-animate {
+    animation: wa-wiggle 0.55s ease-in-out;
+  }
+</style>
+
+<script>
+  const waBtn = document.getElementById("whatsapp-btn");
+
+  function triggerWiggle() {
+    if (!waBtn) return;
+    waBtn.classList.remove("wa-animate");
+    void (waBtn as HTMLElement).offsetWidth; // reflow para reiniciar animación
+    waBtn.classList.add("wa-animate");
+    waBtn.addEventListener(
+      "animationend",
+      () => waBtn.classList.remove("wa-animate"),
+      { once: true },
+    );
+  }
+
+  const ctaIds = [
+    "hero-contact-btn",
+    "services-contact-btn",
+    "contact-section-btn",
+    "navbar-contact-btn",
+    "mobile-contact-btn",
+    "contact-form-btn",
+  ];
+
+  ctaIds.forEach((id) => {
+    const el = document.getElementById(id);
+    el?.addEventListener("mouseenter", triggerWiggle);
+    el?.addEventListener("click", triggerWiggle);
+  });
+</script>

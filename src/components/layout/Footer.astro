@@ -14,7 +14,7 @@ const homeUrl = lang === "es" ? "/es" : "/";
 <footer class="border-t border-border bg-[#080808] py-10">
   <Container>
     <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-      <a href={homeUrl} aria-label="Home">
+      <a href={homeUrl} id="footer-logo-link" aria-label="Home">
         <Image
           src={logo}
           alt="chrod logo"
@@ -31,12 +31,16 @@ const homeUrl = lang === "es" ? "/es" : "/";
         <div class="flex items-center gap-3 text-xs text-slate-700">
           <a
             href={t("footer.privacy.url")}
+            target="_blank"
+            rel="noopener noreferrer"
             class="transition-colors hover:text-slate-400"
             >{t("footer.privacy")}</a
           >
           <span aria-hidden="true">·</span>
           <a
             href={t("footer.terms.url")}
+            target="_blank"
+            rel="noopener noreferrer"
             class="transition-colors hover:text-slate-400"
             >{t("footer.terms")}</a
           >
@@ -86,3 +90,17 @@ const homeUrl = lang === "es" ? "/es" : "/";
     </div>
   </Container>
 </footer>
+
+<script>
+  // Logo: scroll to top without reload when already on the home page
+  const footerLogo = document.getElementById(
+    "footer-logo-link",
+  ) as HTMLAnchorElement | null;
+  footerLogo?.addEventListener("click", (e) => {
+    const href = footerLogo.getAttribute("href");
+    if (href && window.location.pathname === href) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+</script>

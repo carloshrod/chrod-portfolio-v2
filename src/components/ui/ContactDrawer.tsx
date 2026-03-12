@@ -207,6 +207,7 @@ const ContactDrawer = ({ lang = "en" }: { lang?: Locale }) => {
               )}
 
               <button
+                id="contact-form-btn"
                 type="submit"
                 disabled={status === "sending"}
                 className="w-full rounded-lg bg-red-600 py-3 text-sm font-semibold text-white transition-all hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/20 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"

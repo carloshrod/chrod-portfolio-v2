@@ -23,7 +23,12 @@ const navLinks = [
 >
   <Container>
     <nav class="grid h-16 grid-cols-[auto_1fr_auto] items-center">
-      <a href={homeUrl} class="flex items-center gap-2" aria-label="Home">
+      <a
+        href={homeUrl}
+        id="navbar-logo-link"
+        class="flex items-center gap-2"
+        aria-label="Home"
+      >
         <Image
           src={logo}
           alt="chrod logo"
@@ -269,4 +274,16 @@ const navLinks = [
   );
 
   sections.forEach((s) => observer.observe(s));
+
+  // Logo: scroll to top without reload when already on the home page
+  const logoLink = document.getElementById(
+    "navbar-logo-link",
+  ) as HTMLAnchorElement | null;
+  logoLink?.addEventListener("click", (e) => {
+    const href = logoLink.getAttribute("href");
+    if (href && window.location.pathname === href) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
 </script>

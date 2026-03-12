@@ -30,6 +30,8 @@ export const ui: Record<Locale, Record<string, string>> = {
     "about.stat1.label": "Years experience",
     "about.stat2.label": "Projects shipped",
     "about.stat3.label": "Happy clients",
+    "about.resume": "Download Resume",
+    "about.resume.url": "/resume-en.pdf",
 
     // Services
     "services.label": "Services",
@@ -156,12 +158,14 @@ export const ui: Record<Locale, Record<string, string>> = {
     "about.stat1.label": "Años de experiencia",
     "about.stat2.label": "Proyectos entregados",
     "about.stat3.label": "Clientes satisfechos",
+    "about.resume": "Descargar CV",
+    "about.resume.url": "/resume-es.pdf",
 
     // Services
     "services.label": "Servicios",
     "services.heading": "Cómo puedo ayudarte",
     "services.subtitle":
-      "Ya sea que estés lanzando un nuevo proyecto o mejorando uno existente, me enfoco en crear soluciones limpias y de alto rendimiento, adaptadas a tus objetivos — sin plantillas genéricas.",
+      "Ya sea que estés lanzando un nuevo proyecto o mejorando uno existente, me enfoco en crear soluciones limpias y de alto rendimiento, adaptadas a tus objetivos, sin plantillas genéricas.",
     "services.cta.text":
       "¿No tienes claro lo que necesitas? Cuéntame sobre tu proyecto y encontremos la mejor solución.",
     "services.cta.button": "Cuéntame tu idea",
@@ -209,7 +213,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     "contact.label": "Contacto",
     "contact.heading": "Trabajemos juntos",
     "contact.body":
-      "¿Tienes un proyecto en mente o simplemente quieres conectar? Me encantaría escucharte. Abre el formulario o escríbeme directamente por WhatsApp — como prefieras.",
+      "¿Tienes un proyecto en mente o simplemente quieres conectar? Me encantaría escucharte. Abre el formulario o si prefieres, podemos hablar por WhatsApp.",
     "contact.button": "Hablemos",
 
     // Footer
