@@ -2,10 +2,17 @@ import { useState, useEffect, useCallback } from "react";
 import { ProjectCard } from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import type { Project } from "./project.types";
+import type { Locale } from "../../i18n/ui";
 
 export type { Project };
 
-export default function ProjectsGrid({ projects }: { projects: Project[] }) {
+export default function ProjectsGrid({
+  projects,
+  lang = "en",
+}: {
+  projects: Project[];
+  lang?: Locale;
+}) {
   const [selected, setSelected] = useState<Project | null>(null);
 
   const close = useCallback(() => setSelected(null), []);
@@ -37,7 +44,9 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
           />
         ))}
       </div>
-      {selected && <ProjectModal project={selected} onClose={close} />}
+      {selected && (
+        <ProjectModal project={selected} onClose={close} lang={lang} />
+      )}
     </>
   );
 }

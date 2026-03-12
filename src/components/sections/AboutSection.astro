@@ -1,5 +1,10 @@
 ---
 import Container from "../layout/Container.astro";
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
 ---
 
 <section id="about" class="py-24 bg-surface-alt">
@@ -10,40 +15,29 @@ import Container from "../layout/Container.astro";
         <p
           class="mb-3 text-sm font-semibold uppercase tracking-widest text-red-400"
         >
-          About Me
+          {t("about.label")}
         </p>
         <h2 class="mb-6 text-3xl font-bold text-slate-100 sm:text-4xl">
-          Passionate about building great web experiences
+          {t("about.heading")}
         </h2>
         <div class="space-y-4 leading-relaxed text-slate-400">
-          <p>
-            A full-stack developer with a strong focus on frontend, dedicated to
-            building responsive, accessible, and high-performance interfaces
-            using modern tools and frameworks.
-          </p>
-          <p>
-            Enjoys working across the entire stack—from designing clean UI
-            components, to connecting APIs and managing databases. Deeply values
-            code quality, developer experience, and delivering real value.
-          </p>
-          <p>
-            Outside of coding, explores new technologies and sharpens design
-            sensibilities.
-          </p>
+          <p>{t("about.p1")}</p>
+          <p>{t("about.p2")}</p>
+          <p>{t("about.p3")}</p>
         </div>
 
-        <div class="mt-10 flex flex-wrap gap-8 text-sm">
+        <div class="mt-10 flex flex-wrap gap-6 text-sm">
           <div>
             <p class="text-3xl font-bold text-red-400">3+</p>
-            <p class="mt-1 text-slate-500">Years experience</p>
+            <p class="mt-1 text-slate-500">{t("about.stat1.label")}</p>
           </div>
-          <div class="border-l border-border pl-8">
+          <div class="border-l border-border pl-6">
             <p class="text-3xl font-bold text-red-400">10+</p>
-            <p class="mt-1 text-slate-500">Projects shipped</p>
+            <p class="mt-1 text-slate-500">{t("about.stat2.label")}</p>
           </div>
-          <div class="border-l border-border pl-8">
+          <div class="border-l border-border pl-6">
             <p class="text-3xl font-bold text-red-400">10+</p>
-            <p class="mt-1 text-slate-500">Happy clients</p>
+            <p class="mt-1 text-slate-500">{t("about.stat3.label")}</p>
           </div>
         </div>
       </div>

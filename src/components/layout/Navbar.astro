@@ -2,13 +2,19 @@
 import { Image } from "astro:assets";
 import logo from "../../assets/chrod-logo.png";
 import Container from "./Container.astro";
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
+const homeUrl = lang === "es" ? "/es" : "/";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#reviews", label: "Testimonials" },
+  { href: "#about", label: t("nav.about") },
+  { href: "#services", label: t("nav.services") },
+  { href: "#skills", label: t("nav.skills") },
+  { href: "#projects", label: t("nav.projects") },
+  { href: "#reviews", label: t("nav.testimonials") },
 ];
 ---
 
@@ -16,8 +22,8 @@ const navLinks = [
   class="fixed inset-x-0 top-0 z-50 border-b border-border bg-[#080808]/80 backdrop-blur-md"
 >
   <Container>
-    <nav class="flex h-16 items-center justify-between">
-      <a href="/" class="flex items-center gap-2" aria-label="Home">
+    <nav class="grid h-16 grid-cols-[auto_1fr_auto] items-center">
+      <a href={homeUrl} class="flex items-center gap-2" aria-label="Home">
         <Image
           src={logo}
           alt="chrod logo"
@@ -26,8 +32,8 @@ const navLinks = [
         />
       </a>
 
-      <!-- Desktop nav -->
-      <ul class="hidden items-center gap-8 md:flex">
+      <!-- Desktop nav links (centered) -->
+      <ul class="hidden items-center justify-center gap-8 md:flex">
         {
           navLinks.map((link) => (
             <li>
@@ -43,54 +49,104 @@ const navLinks = [
         }
       </ul>
 
-      <!-- Contact button (desktop) -->
-      <button
-        id="navbar-contact-btn"
-        class="hidden rounded-lg border border-red-600/50 px-4 py-1.5 text-sm font-medium text-red-400 transition-all hover:border-red-400 hover:text-red-300 cursor-pointer md:block"
-      >
-        Contact
-      </button>
+      <!-- Desktop right: lang switcher + contact -->
+      <div class="hidden items-center gap-3 md:flex">
+        <div
+          class="flex items-center rounded-full border border-border bg-surface-alt text-xs font-semibold overflow-hidden"
+        >
+          <a
+            href="/"
+            class={`px-3 py-1 transition-colors ${
+              lang === "en"
+                ? "bg-surface-raised text-red-400"
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+            aria-label="Switch to English">EN</a
+          >
+          <a
+            href="/es"
+            class={`px-3 py-1 transition-colors ${
+              lang === "es"
+                ? "bg-surface-raised text-red-400"
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+            aria-label="Cambiar a Español">ES</a
+          >
+        </div>
+        <button
+          id="navbar-contact-btn"
+          class="rounded-lg border border-red-600/50 px-4 py-1.5 text-sm font-medium text-red-400 transition-all hover:border-red-400 hover:text-red-300 cursor-pointer"
+        >
+          {t("nav.contact")}
+        </button>
+      </div>
 
-      <!-- Mobile menu toggle -->
-      <button
-        id="mobile-menu-toggle"
-        class="flex items-center rounded-md p-2 text-slate-400 transition-colors hover:text-red-400 cursor-pointer md:hidden"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-      >
-        <svg
-          id="icon-menu"
-          xmlns="http://www.w3.org/2000/svg"
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+      <!-- Mobile right: lang switcher + hamburger -->
+      <div class="flex justify-end items-center gap-3 md:hidden">
+        <div
+          class="flex items-center rounded-full border border-border bg-surface-alt text-xs font-semibold overflow-hidden"
         >
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-        <svg
-          id="icon-close"
-          class="hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          <a
+            href="/"
+            class={`px-3 py-1 transition-colors ${
+              lang === "en"
+                ? "bg-surface-raised text-red-400"
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+            aria-label="Switch to English">EN</a
+          >
+          <a
+            href="/es"
+            class={`px-3 py-1 transition-colors ${
+              lang === "es"
+                ? "bg-surface-raised text-red-400"
+                : "text-slate-400 hover:text-slate-200"
+            }`}
+            aria-label="Cambiar a Español">ES</a
+          >
+        </div>
+
+        <!-- Mobile: hamburger -->
+        <button
+          id="mobile-menu-toggle"
+          class="flex items-center justify-end rounded-md p-2 text-slate-400 transition-colors hover:text-red-400 cursor-pointer md:hidden"
+          aria-label="Toggle menu"
+          aria-expanded="false"
         >
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+          <svg
+            id="icon-menu"
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg
+            id="icon-close"
+            class="hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </nav>
   </Container>
 
@@ -111,12 +167,14 @@ const navLinks = [
           ))
         }
         <li class="pt-2">
-          <button
-            id="mobile-contact-btn"
-            class="mobile-nav-link w-full rounded-lg border border-red-600/50 px-3 py-2 text-center text-sm font-medium text-red-400 transition-all hover:border-red-400 cursor-pointer"
-          >
-            Contact
-          </button>
+          <div class="flex items-center">
+            <button
+              id="mobile-contact-btn"
+              class="flex-1 rounded-lg border border-red-600/50 px-3 py-2 text-center text-sm font-medium text-red-400 transition-all hover:border-red-400 cursor-pointer"
+            >
+              {t("nav.contact")}
+            </button>
+          </div>
         </li>
       </ul>
     </Container>

@@ -2,14 +2,19 @@
 import { Image } from "astro:assets";
 import logo from "../../assets/chrod-logo.png";
 import Container from "./Container.astro";
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
 
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
 const year = new Date().getFullYear();
+const homeUrl = lang === "es" ? "/es" : "/";
 ---
 
 <footer class="border-t border-border bg-[#080808] py-10">
   <Container>
     <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-      <a href="/" aria-label="Home">
+      <a href={homeUrl} aria-label="Home">
         <Image
           src={logo}
           alt="chrod logo"
@@ -21,16 +26,19 @@ const year = new Date().getFullYear();
         class="flex flex-col items-center gap-1.5 text-center sm:items-start"
       >
         <p class="text-sm text-slate-600">
-          &copy; {year} chrod. All rights reserved.
+          &copy; {year} chrod. {t("footer.rights")}
         </p>
         <div class="flex items-center gap-3 text-xs text-slate-700">
           <a
-            href="/privacy-policy"
-            class="transition-colors hover:text-slate-400">Privacy Policy</a
+            href={t("footer.privacy.url")}
+            class="transition-colors hover:text-slate-400"
+            >{t("footer.privacy")}</a
           >
           <span aria-hidden="true">·</span>
-          <a href="/terms" class="transition-colors hover:text-slate-400"
-            >Terms & Conditions</a
+          <a
+            href={t("footer.terms.url")}
+            class="transition-colors hover:text-slate-400"
+            >{t("footer.terms")}</a
           >
         </div>
       </div>

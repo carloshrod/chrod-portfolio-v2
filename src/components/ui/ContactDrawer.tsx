@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
+import { ui } from "../../i18n/ui";
+import type { Locale } from "../../i18n/ui";
 
 type FormState = { name: string; email: string; message: string };
 type Status = "idle" | "sending" | "sent" | "error";
 
-const ContactDrawer = () => {
+const ContactDrawer = ({ lang = "en" }: { lang?: Locale }) => {
+  const t = (key: string) =>
+    (ui[lang] as Record<string, string>)[key] ??
+    (ui["en"] as Record<string, string>)[key] ??
+    key;
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState<FormState>({
     name: "",
@@ -64,7 +70,7 @@ const ContactDrawer = () => {
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Contact form"
+        aria-label={t("drawer.title")}
         className={`fixed inset-y-0 right-0 z-70 flex w-full max-w-md flex-col bg-[#0e0e1a] shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -78,13 +84,13 @@ const ContactDrawer = () => {
               className="h-8 w-auto"
             />
             <h2 className="text-lg font-semibold text-slate-100">
-              Get in touch
+              {t("drawer.title")}
             </h2>
           </div>
           <button
             onClick={close}
-            aria-label="Close contact form"
-            className="rounded-md p-1.5 text-slate-400 transition-colors hover:bg-border hover:text-slate-200"
+            aria-label={t("drawer.close.label")}
+            className="rounded-md p-1.5 text-slate-400 transition-colors hover:bg-border hover:text-slate-200 cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -123,30 +129,26 @@ const ContactDrawer = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-slate-100">
-                Message sent!
+                {t("drawer.success.title")}
               </h3>
-              <p className="text-slate-400">
-                Thanks for reaching out. I'll get back to you soon.
-              </p>
+              <p className="text-slate-400">{t("drawer.success.body")}</p>
               <button
                 onClick={close}
                 className="mt-4 rounded-lg bg-red-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-500"
               >
-                Close
+                {t("drawer.success.close")}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-              <p className="text-sm text-slate-400">
-                Fill out the form below and I'll respond as soon as possible.
-              </p>
+              <p className="text-sm text-slate-400">{t("drawer.form.intro")}</p>
 
               <div className="space-y-1.5">
                 <label
                   htmlFor="drawer-name"
                   className="block text-sm font-medium text-slate-300"
                 >
-                  Name
+                  {t("drawer.name.label")}
                 </label>
                 <input
                   id="drawer-name"
@@ -156,7 +158,7 @@ const ContactDrawer = () => {
                   autoComplete="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="Your name"
+                  placeholder={t("drawer.name.placeholder")}
                   className="w-full rounded-lg border border-border bg-surface-alt px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
                 />
               </div>
@@ -166,7 +168,7 @@ const ContactDrawer = () => {
                   htmlFor="drawer-email"
                   className="block text-sm font-medium text-slate-300"
                 >
-                  Email
+                  {t("drawer.email.label")}
                 </label>
                 <input
                   id="drawer-email"
@@ -176,7 +178,7 @@ const ContactDrawer = () => {
                   autoComplete="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="your@email.com"
+                  placeholder={t("drawer.email.placeholder")}
                   className="w-full rounded-lg border border-border bg-surface-alt px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
                 />
               </div>
@@ -186,7 +188,7 @@ const ContactDrawer = () => {
                   htmlFor="drawer-message"
                   className="block text-sm font-medium text-slate-300"
                 >
-                  Message
+                  {t("drawer.message.label")}
                 </label>
                 <textarea
                   id="drawer-message"
@@ -195,23 +197,23 @@ const ContactDrawer = () => {
                   rows={5}
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your project or idea…"
+                  placeholder={t("drawer.message.placeholder")}
                   className="w-full resize-none rounded-lg border border-border bg-surface-alt px-4 py-2.5 text-sm text-slate-200 placeholder-slate-600 outline-none transition-all focus:border-red-600 focus:ring-2 focus:ring-red-600/30"
                 />
               </div>
 
               {status === "error" && (
-                <p className="text-sm text-red-400">
-                  Something went wrong. Please try again.
-                </p>
+                <p className="text-sm text-red-400">{t("drawer.error")}</p>
               )}
 
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full rounded-lg bg-red-600 py-3 text-sm font-semibold text-white transition-all hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/20 disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg bg-red-600 py-3 text-sm font-semibold text-white transition-all hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/20 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {status === "sending" ? "Sending…" : "Send Message"}
+                {status === "sending"
+                  ? t("drawer.sending")
+                  : t("drawer.submit")}
               </button>
             </form>
           )}

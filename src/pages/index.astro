@@ -12,18 +12,18 @@ import ContactSection from "../components/sections/ContactSection.astro";
 import ContactDrawer from "../components/ui/ContactDrawer.tsx";
 ---
 
-<MainLayout>
-  <Navbar />
+<MainLayout lang="en">
+  <Navbar lang="en" />
   <main>
-    <HeroSection />
-    <AboutSection />
-    <ServicesSection />
-    <SkillsSection />
-    <ProjectsSection />
-    <ReviewsSection />
-    <ContactSection />
+    <HeroSection lang="en" />
+    <AboutSection lang="en" />
+    <ServicesSection lang="en" />
+    <SkillsSection lang="en" />
+    <ProjectsSection lang="en" />
+    <ReviewsSection lang="en" />
+    <ContactSection lang="en" />
   </main>
-  <Footer />
+  <Footer lang="en" />
   <!-- ContactDrawer rendered once at root level, opened via CustomEvent -->
-  <ContactDrawer client:load />
+  <ContactDrawer client:load lang="en" />
 </MainLayout>

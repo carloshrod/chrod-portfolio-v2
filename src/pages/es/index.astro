@@ -1,0 +1,33 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Navbar from "../../components/layout/Navbar.astro";
+import Footer from "../../components/layout/Footer.astro";
+import HeroSection from "../../components/sections/HeroSection.astro";
+import AboutSection from "../../components/sections/AboutSection.astro";
+import ServicesSection from "../../components/sections/ServicesSection.astro";
+import SkillsSection from "../../components/sections/SkillsSection.astro";
+import ProjectsSection from "../../components/sections/ProjectsSection.astro";
+import ReviewsSection from "../../components/sections/ReviewsSection.astro";
+import ContactSection from "../../components/sections/ContactSection.astro";
+import ContactDrawer from "../../components/ui/ContactDrawer.tsx";
+---
+
+<MainLayout
+  lang="es"
+  title="chrod — Portafolio de Desarrollador"
+  description="Portafolio de desarrollador full-stack con proyectos, habilidades y experiencia."
+>
+  <Navbar lang="es" />
+  <main>
+    <HeroSection lang="es" />
+    <AboutSection lang="es" />
+    <ServicesSection lang="es" />
+    <SkillsSection lang="es" />
+    <ProjectsSection lang="es" />
+    <ReviewsSection lang="es" />
+    <ContactSection lang="es" />
+  </main>
+  <Footer lang="es" />
+  <!-- ContactDrawer rendered once at root level, opened via CustomEvent -->
+  <ContactDrawer client:load lang="es" />
+</MainLayout>

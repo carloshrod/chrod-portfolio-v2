@@ -1,8 +1,16 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
+---
+
 <a
   href="https://wa.me/573127600792"
   target="_blank"
   rel="noopener noreferrer"
-  aria-label="Contact me on WhatsApp"
+  aria-label={t("whatsapp.label")}
   class="group fixed bottom-6 right-6 z-80 flex h-14 w-14 items-center justify-center rounded-full bg-surface ring-1 ring-border shadow-lg shadow-black/50 transition-all duration-300 hover:scale-110 hover:bg-surface-raised hover:ring-border-muted"
 >
   <svg

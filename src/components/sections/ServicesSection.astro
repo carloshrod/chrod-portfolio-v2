@@ -1,41 +1,40 @@
 ---
 import Container from "../layout/Container.astro";
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
 
 const services = [
   {
-    title: "Landing Pages",
-    description:
-      "Fast, focused, and built to convert. I craft landing pages that communicate your value proposition clearly and turn visitors into leads or customers — no bloat, just results.",
+    title: t("services.s1.title"),
+    description: t("services.s1.desc"),
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
   },
   {
-    title: "Business Websites",
-    description:
-      "Your website is your first impression. I build polished, professional sites that reflect your brand, instill trust, and give you a solid foundation for growth.",
+    title: t("services.s2.title"),
+    description: t("services.s2.desc"),
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
   },
   {
-    title: "Web Applications",
-    description:
-      "From idea to production-ready product. I develop scalable, interactive web apps with clean architecture, real-time features, and intuitive UX — built to handle real-world complexity.",
+    title: t("services.s3.title"),
+    description: t("services.s3.desc"),
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
   },
   {
-    title: "E-commerce Development",
-    description:
-      "Online stores that don't just look great — they sell. Whether it's a custom Shopify setup or a tailored solution, I build e-commerce experiences that delight shoppers and maximize revenue.",
+    title: t("services.s4.title"),
+    description: t("services.s4.desc"),
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`,
   },
   {
-    title: "API & Backend Development",
-    description:
-      "The engine behind your product. I design and build robust REST APIs, handle authentication, integrate third-party services, and set up the server-side logic your app depends on.",
+    title: t("services.s5.title"),
+    description: t("services.s5.desc"),
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
   },
   {
-    title: "Workflow Automation",
-    description:
-      "Stop wasting time on repetitive tasks. I build automated workflows using tools like n8n to connect your apps, trigger actions, and keep your business running on autopilot.",
+    title: t("services.s6.title"),
+    description: t("services.s6.desc"),
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
   },
 ];
@@ -48,15 +47,13 @@ const services = [
       <p
         class="mb-3 text-sm font-semibold uppercase tracking-widest text-red-400"
       >
-        Services
+        {t("services.label")}
       </p>
       <h2 class="mb-4 text-3xl font-bold text-slate-100 sm:text-4xl">
-        What I can build for you
+        {t("services.heading")}
       </h2>
       <p class="text-slate-400 leading-relaxed">
-        Whether you're launching something new or improving what already exists,
-        I focus on delivering clean, performant solutions that are tailored to
-        your goals — not generic templates.
+        {t("services.subtitle")}
       </p>
     </div>
 
@@ -92,13 +89,13 @@ const services = [
     <!-- CTA -->
     <div class="mt-14 flex flex-col items-center gap-4 text-center">
       <p class="text-slate-400">
-        Not sure what you need? Let's talk and figure it out together.
+        {t("services.cta.text")}
       </p>
       <button
         id="services-contact-btn"
         class="rounded-lg bg-red-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-red-500 active:scale-95 cursor-pointer"
       >
-        Get in touch
+        {t("services.cta.button")}
       </button>
     </div>
   </Container>

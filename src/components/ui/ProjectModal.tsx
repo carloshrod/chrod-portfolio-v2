@@ -1,13 +1,21 @@
 import { useState } from "react";
 import { CodeIcon, ExternalLinkIcon, GithubIcon } from "./project.icons";
 import type { Project } from "./project.types";
+import { ui } from "../../i18n/ui";
+import type { Locale } from "../../i18n/ui";
 
 interface Props {
   project: Project;
   onClose: () => void;
+  lang?: Locale;
 }
 
-const ProjectModal = ({ project, onClose }: Props) => {
+const ProjectModal = ({ project, onClose, lang = "en" }: Props) => {
+  const t = (key: string) =>
+    (ui[lang] as Record<string, string>)[key] ??
+    (ui["en"] as Record<string, string>)[key] ??
+    key;
+
   const [activeScreenshot, setActiveScreenshot] = useState(0);
   const screenshots = project.screenshots ?? [];
 
@@ -34,7 +42,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close project details"
+          aria-label={t("modal.close")}
           className="rounded-full p-2 text-slate-500 transition-colors hover:bg-red-600/15 hover:text-slate-300 cursor-pointer"
         >
           <svg
@@ -111,7 +119,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
                 <circle cx="9" cy="9" r="2" />
                 <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
               </svg>
-              <p className="text-sm">No screenshots available</p>
+              <p className="text-sm">{t("modal.no_screenshots")}</p>
             </div>
           </div>
         )}
@@ -119,7 +127,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
         {/* About */}
         <div className="mb-8">
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-widest text-slate-500">
-            About the project
+            {t("modal.about")}
           </h3>
           <p className="text-base leading-relaxed text-slate-300">
             {project.longDescription ?? project.description}
@@ -129,7 +137,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
         {/* Technologies */}
         <div className="mb-8">
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-widest text-slate-500">
-            Technologies
+            {t("modal.tech")}
           </h3>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
@@ -156,7 +164,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
                 className="inline-flex items-center gap-2 rounded-lg bg-[#111] px-4 py-2.5 text-sm font-medium text-slate-300 ring-1 ring-[#222] transition-colors hover:bg-[#161616] hover:text-slate-100"
               >
                 <GithubIcon />
-                {repo.label ?? "View on GitHub"}
+                {repo.label ?? t("modal.github.default")}
               </a>
             ))}
             {project.liveUrl && (
@@ -167,7 +175,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
                 className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-red-700"
               >
                 <ExternalLinkIcon />
-                Live demo
+                {t("modal.live")}
               </a>
             )}
           </div>

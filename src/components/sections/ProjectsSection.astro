@@ -1,6 +1,11 @@
 ---
 import Container from "../layout/Container.astro";
 import ProjectsGrid from "../ui/ProjectsGrid";
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
+
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
 
 const projects = [
   {
@@ -82,17 +87,16 @@ const projects = [
       <p
         class="mb-3 text-sm font-semibold uppercase tracking-widest text-red-400"
       >
-        Work
+        {t("projects.label")}
       </p>
       <h2 class="text-3xl font-bold text-slate-100 sm:text-4xl">
-        Selected Projects
+        {t("projects.heading")}
       </h2>
       <p class="mx-auto mt-4 max-w-xl text-slate-400">
-        A collection of projects I've built — from simple static sites, through
-        dashboards and e-commerce platforms, to full-stack apps.
+        {t("projects.subtitle")}
       </p>
     </div>
 
-    <ProjectsGrid client:load projects={projects} />
+    <ProjectsGrid client:load projects={projects} lang={lang} />
   </Container>
 </section>

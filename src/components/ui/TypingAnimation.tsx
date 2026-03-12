@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
-const SUFFIX = " Developer";
-const prefixes = [
+const TYPING_SPEED = 80;
+const DELETING_SPEED = 45;
+const PAUSE_AFTER_TYPE = 1600;
+const PAUSE_AFTER_DELETE = 400;
+
+const PREFIXES = [
   "Frontend",
   "Backend",
   "Full-Stack",
   "React & Next.js",
   "Automation",
 ];
-
-const TYPING_SPEED = 80;
-const DELETING_SPEED = 45;
-const PAUSE_AFTER_TYPE = 1600;
-const PAUSE_AFTER_DELETE = 400;
+const SUFFIX = " Developer";
 
 export default function TypingAnimation() {
   const [displayedPrefix, setDisplayedPrefix] = useState("");
@@ -21,7 +21,7 @@ export default function TypingAnimation() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const currentPrefix = prefixes[prefixIndex];
+    const currentPrefix = PREFIXES[prefixIndex];
 
     // Phase 1: type the full first role ("Frontend Developer") char by char
     if (!suffixShown) {
@@ -51,7 +51,7 @@ export default function TypingAnimation() {
     if (isDeleting && displayedPrefix === "") {
       const t = setTimeout(() => {
         setIsDeleting(false);
-        setPrefixIndex((i) => (i + 1) % prefixes.length);
+        setPrefixIndex((i) => (i + 1) % PREFIXES.length);
       }, PAUSE_AFTER_DELETE);
       return () => clearTimeout(t);
     }

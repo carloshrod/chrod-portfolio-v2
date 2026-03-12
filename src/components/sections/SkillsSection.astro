@@ -1,6 +1,8 @@
 ---
 import Container from "../layout/Container.astro";
 import SkillBadge from "../ui/SkillBadge.astro";
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
 import {
   siJavascript,
   siTypescript,
@@ -58,17 +60,20 @@ const iconMap: Record<string, { path: string; hex: string }> = {
   n8n: siN8n,
 };
 
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
+
 const skillGroups = [
   {
-    category: "Languages",
+    category: t("skills.category.languages"),
     skills: ["JavaScript", "TypeScript", "HTML5", "CSS3"],
   },
   {
-    category: "Frameworks & Libraries",
+    category: t("skills.category.frameworks"),
     skills: ["React", "Next.js", "Astro", "Express.js"],
   },
   {
-    category: "UI & Styling",
+    category: t("skills.category.ui"),
     skills: [
       "Tailwind CSS",
       "Bootstrap",
@@ -78,11 +83,11 @@ const skillGroups = [
     ],
   },
   {
-    category: "Backend & Databases",
+    category: t("skills.category.backend"),
     skills: ["Node.js", "PostgreSQL", "MySQL", "MongoDB", "Firebase"],
   },
   {
-    category: "Tools & Workflow",
+    category: t("skills.category.tools"),
     skills: ["Git", "GitHub", "n8n", "Shopify"],
   },
 ];
@@ -101,10 +106,10 @@ const skillGroups = [
       <p
         class="mb-3 text-sm font-semibold uppercase tracking-widest text-red-400"
       >
-        Skills
+        {t("skills.label")}
       </p>
       <h2 class="text-3xl font-bold text-slate-100 sm:text-4xl">
-        Technologies I work with
+        {t("skills.heading")}
       </h2>
     </div>
 

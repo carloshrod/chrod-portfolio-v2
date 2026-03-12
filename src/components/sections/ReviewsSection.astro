@@ -1,6 +1,8 @@
 ---
 import Container from "../layout/Container.astro";
 import ReviewsCarousel from "../ui/ReviewsCarousel.tsx";
+import { useTranslations } from "../../i18n/utils";
+import type { Locale } from "../../i18n/ui";
 
 const reviews = [
   {
@@ -65,6 +67,9 @@ const reviews = [
     source: "direct",
   },
 ] as const;
+
+const { lang = "en" } = Astro.props as { lang?: Locale };
+const t = useTranslations(lang);
 ---
 
 <section id="reviews" class="py-24 bg-surface-alt overflow-hidden">
@@ -73,13 +78,13 @@ const reviews = [
       <p
         class="mb-3 text-sm font-semibold uppercase tracking-widest text-red-400"
       >
-        Testimonials
+        {t("reviews.label")}
       </p>
       <h2 class="text-3xl font-bold text-slate-100 sm:text-4xl">
-        What clients say
+        {t("reviews.heading")}
       </h2>
       <p class="mx-auto mt-4 max-w-xl text-slate-400">
-        Feedback from people I've had the pleasure of working with.
+        {t("reviews.subtitle")}
       </p>
     </div>
   </Container>
