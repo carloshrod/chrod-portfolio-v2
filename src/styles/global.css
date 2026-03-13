@@ -58,4 +58,15 @@
     background: #D52C33;
     border-radius: 3px;
   }
+
+  /* Override browser autofill background on dark theme */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 9999px #0d0d0d inset !important;
+    box-shadow: 0 0 0 9999px #0d0d0d inset !important;
+    -webkit-text-fill-color: #e2e8f0 !important;
+    caret-color: #e2e8f0;
+  }
 }
