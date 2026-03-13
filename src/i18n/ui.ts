@@ -40,7 +40,7 @@ export const ui: Record<Locale, Record<string, string>> = {
       "Whether you're launching something new or improving what already exists, I focus on delivering clean, performant solutions that are tailored to your goals — not generic templates.",
     "services.cta.text":
       "Not sure what you need? Let's talk and figure it out together.",
-    "services.cta.button": "Get in touch",
+    "services.cta.button": "Tell me about your project",
     "services.s1.title": "Landing Pages",
     "services.s1.desc":
       "Fast, focused, and built to convert. I craft landing pages that communicate your value proposition clearly and turn visitors into leads or customers — no bloat, just results.",

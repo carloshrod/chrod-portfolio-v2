@@ -45,7 +45,7 @@ const navLinks = [
               <a
                 href={link.href}
                 data-nav-link={link.href}
-                class="nav-link text-sm font-medium text-slate-400 transition-colors hover:text-red-400"
+                class="nav-link text-sm font-medium text-slate-400 transition-colors hover:text-red-400 active:text-red-400"
               >
                 {link.label}
               </a>
@@ -61,6 +61,7 @@ const navLinks = [
         >
           <a
             href="/"
+            data-lang-link="en"
             class={`px-3 py-1 transition-colors ${
               lang === "en"
                 ? "bg-surface-raised text-red-400"
@@ -70,6 +71,7 @@ const navLinks = [
           >
           <a
             href="/es"
+            data-lang-link="es"
             class={`px-3 py-1 transition-colors ${
               lang === "es"
                 ? "bg-surface-raised text-red-400"
@@ -93,6 +95,7 @@ const navLinks = [
         >
           <a
             href="/"
+            data-lang-link="en"
             class={`px-3 py-1 transition-colors ${
               lang === "en"
                 ? "bg-surface-raised text-red-400"
@@ -102,6 +105,7 @@ const navLinks = [
           >
           <a
             href="/es"
+            data-lang-link="es"
             class={`px-3 py-1 transition-colors ${
               lang === "es"
                 ? "bg-surface-raised text-red-400"
@@ -164,7 +168,8 @@ const navLinks = [
             <li>
               <a
                 href={link.href}
-                class="mobile-nav-link block rounded-md px-3 py-2 text-center text-sm font-medium text-slate-400 transition-colors hover:bg-border hover:text-red-400"
+                data-nav-link={link.href}
+                class="mobile-nav-link block rounded-md px-3 py-2 text-center text-sm font-medium text-slate-400 transition-colors hover:bg-border hover:text-red-400 active:bg-border active:text-red-400"
               >
                 {link.label}
               </a>
@@ -175,7 +180,7 @@ const navLinks = [
           <div class="flex items-center">
             <button
               id="mobile-contact-btn"
-              class="flex-1 rounded-lg border border-red-600/50 px-3 py-2 text-center text-sm font-medium text-red-400 transition-all hover:border-red-400 cursor-pointer"
+              class="flex-1 rounded-lg border border-red-600/50 px-3 py-2 text-center text-sm font-medium text-red-400 transition-all hover:border-red-400 active:border-red-400 cursor-pointer"
             >
               {t("nav.contact")}
             </button>
@@ -239,6 +244,20 @@ const navLinks = [
   const visibleSections = new Map<string, boolean>();
   sections.forEach((s) => visibleSections.set(s.id, false));
 
+  const langLinks =
+    document.querySelectorAll<HTMLAnchorElement>("a[data-lang-link]");
+
+  function updateLangLinks(hash: string) {
+    langLinks.forEach((a) => {
+      const lang = a.getAttribute("data-lang-link");
+      const base = lang === "es" ? "/es" : "/";
+      a.href = hash ? `${base}${hash}` : base;
+    });
+  }
+
+  // Initialise with the current hash if any
+  updateLangLinks(window.location.hash);
+
   function updateActive() {
     let activeId: string | null = null;
     let minTop = Infinity;
@@ -261,6 +280,8 @@ const navLinks = [
       a.classList.toggle("text-red-400", isActive);
       a.classList.toggle("text-slate-400", !isActive);
     });
+
+    updateLangLinks(activeId ? `#${activeId}` : "");
   }
 
   const observer = new IntersectionObserver(
