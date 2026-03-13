@@ -43,7 +43,7 @@ const ProjectModal = ({ project, onClose, lang = "en" }: Props) => {
           type="button"
           onClick={onClose}
           aria-label={t("modal.close")}
-          className="rounded-full p-2 text-slate-500 transition-colors hover:bg-red-600/15 hover:text-slate-300 cursor-pointer"
+          className="rounded-md p-1.5 text-slate-400 transition-colors hover:bg-border hover:text-slate-200 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
