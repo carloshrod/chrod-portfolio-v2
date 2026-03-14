@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import Icon from "../../components/ui/icons.astro";
 
 const lastUpdated = "11 de marzo de 2026";
 ---
@@ -14,19 +15,7 @@ const lastUpdated = "11 de marzo de 2026";
       href="/es"
       class="mb-10 inline-flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-red-400"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="m15 18-6-6 6-6"></path>
-      </svg>
+      <Icon name="back" />
       Volver al inicio
     </a>
 

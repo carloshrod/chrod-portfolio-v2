@@ -1,8 +1,6 @@
 import ReviewCard from "./ReviewCard";
 import type { Review } from "./review.types";
 
-export type { Review };
-
 interface Props {
   reviews: readonly Review[];
 }

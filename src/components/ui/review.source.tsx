@@ -1,5 +1,5 @@
-import type React from "react";
 import type { Review } from "./review.types";
+import { UserIcon } from "./icons";
 
 type Source = NonNullable<Review["source"]>;
 
@@ -19,41 +19,10 @@ export const SOURCE_CONFIG: Record<
       </span>
     ),
   },
-  linkedin: {
-    label: "LinkedIn",
-    className: "bg-[#061929] text-[#5ba4cf] ring-1 ring-[#5ba4cf]/30",
-    icon: (
-      <svg
-        width="10"
-        height="10"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
-  },
   direct: {
     label: "Direct",
     className: "bg-[#111] text-slate-400 ring-1 ring-[#2a2a2a]",
-    icon: (
-      <svg
-        width="10"
-        height="10"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
-    ),
+    icon: <UserIcon />,
   },
 };
 

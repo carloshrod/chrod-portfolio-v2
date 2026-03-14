@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { CodeIcon, ExternalLinkIcon, GithubIcon } from "./project.icons";
+import {
+  CloseIcon,
+  CodeIcon,
+  ExternalLinkIcon,
+  GithubIcon,
+  ImagePlaceholderIcon,
+} from "./icons";
 import type { Project } from "./project.types";
 import { ui } from "../../i18n/ui";
 import type { Locale } from "../../i18n/ui";
@@ -45,20 +51,7 @@ const ProjectModal = ({ project, onClose, lang = "en" }: Props) => {
           aria-label={t("modal.close")}
           className="rounded-md p-1.5 text-slate-400 transition-colors hover:bg-border hover:text-slate-200 cursor-pointer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
+          <CloseIcon />
         </button>
       </div>
 
@@ -103,22 +96,7 @@ const ProjectModal = ({ project, onClose, lang = "en" }: Props) => {
         ) : (
           <div className="mb-10 flex aspect-video w-full items-center justify-center rounded-xl border border-[#1a1a1a] bg-[#0f0f0f]">
             <div className="text-center text-slate-600">
-              <svg
-                className="mx-auto mb-2"
-                xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                <circle cx="9" cy="9" r="2" />
-                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-              </svg>
+              <ImagePlaceholderIcon />
               <p className="text-sm">{t("modal.no_screenshots")}</p>
             </div>
           </div>

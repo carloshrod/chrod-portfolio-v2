@@ -1,4 +1,4 @@
-import { CodeIcon, ExternalLinkIcon, GithubIcon } from "./project.icons";
+import { CodeIcon, ExternalLinkIcon, GithubIcon, SearchIcon } from "./icons";
 import type { Project } from "./project.types";
 
 interface Props {
@@ -12,9 +12,17 @@ export function ProjectCard({ project, onClick }: Props) {
       type="button"
       onClick={onClick}
       aria-label={`View details of ${project.title}`}
-      className="group relative flex w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-surface p-6 text-left outline-none transition-all focus-visible:ring-2 focus-visible:ring-red-500/50 hover:border-red-600/40 hover:shadow-xl hover:shadow-red-900/10"
+      className="group relative flex w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-surface p-6 text-left outline-none transition-all focus-visible:ring-2 focus-visible:ring-red-500/50 hover:border-red-600/40"
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-red-500/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
+      {/* Glow on hover */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(circle at top left, rgba(220,38,38,0.07), transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
 
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-600/15 text-red-400">
@@ -77,20 +85,7 @@ export function ProjectCard({ project, onClick }: Props) {
       </div>
 
       <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-600 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
+        <SearchIcon />
         <span>View details</span>
       </div>
     </button>
