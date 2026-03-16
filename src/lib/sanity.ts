@@ -1,5 +1,6 @@
 import { createClient } from "@sanity/client";
-import type { Project } from "../components/ui/project.types";
+import type { Project } from "../types/project";
+import type { Review } from "../types/review";
 
 const sanityClient = createClient({
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
@@ -13,7 +14,7 @@ export async function getProjects(
 ): Promise<Project[]> {
   const isEs = lang === "es";
 
-  const raw = await sanityClient.fetch<SanityProject[]>(
+  const raw = await sanityClient.fetch<Project[]>(
     `
     *[_type == "project"] | order(order asc) {
       "title": select(
@@ -51,7 +52,7 @@ export async function getProjects(
     { isEs },
   );
 
-  return raw.map((p: SanityProject) => ({
+  return raw.map((p: Project) => ({
     title: p.title,
     description: p.description,
     longDescription: p.longDescription,
@@ -67,17 +68,45 @@ export async function getProjects(
   }));
 }
 
-interface SanityProject {
-  title: string;
-  description: string;
-  longDescription?: string;
-  role?: string;
-  company?: string;
-  year?: string;
-  techStack: string[];
-  keyContributions?: string[];
-  githubRepos?: { url: string; label?: string }[];
-  liveUrl?: string;
-  websiteUrl?: string;
-  screenshots: string[];
+export async function getReviews(lang: "en" | "es" = "en"): Promise<Review[]> {
+  const isEs = lang === "es";
+
+  const raw = await sanityClient.fetch<Review[]>(
+    `
+    *[_type == "review"] | order(order asc) {
+      name,
+      "role": select(
+        $isEs && defined(roleEs) => roleEs,
+        role
+      ),
+      company,
+      avatar,
+      "text": select(
+        $isEs && defined(textEs) => textEs,
+        text
+      ),
+      source,
+      sourceLabel,
+      rating,
+      sourceUrl,
+      linkedinUrl,
+      "companyLogo": companyLogo.asset->url
+    }
+  `,
+    { isEs },
+  );
+
+  return raw.map((r: Review) => ({
+    name: r.name,
+    role: r.role ?? "",
+    company: r.company ?? "",
+    avatar: r.avatar ?? r.name.slice(0, 2).toUpperCase(),
+    text: r.text,
+    source: r.source,
+    sourceLabel: r.sourceLabel,
+    rating: r.rating,
+    sourceUrl: r.sourceUrl,
+    linkedinUrl: r.linkedinUrl,
+    companyLogo: r.companyLogo,
+  }));
 }

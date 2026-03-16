@@ -7,7 +7,7 @@ import {
   ImagePlaceholderIcon,
   SearchIcon,
 } from "./icons";
-import type { Project } from "./project.types";
+import type { Project } from "../../types/project";
 import { ui } from "../../i18n/ui";
 import type { Locale } from "../../i18n/ui";
 

@@ -1,10 +1,10 @@
-import type { Review } from "./review.types";
 import { UserIcon } from "./icons";
+import type { Review } from "../../types/review";
 
-type Source = NonNullable<Review["source"]>;
+type KnownSource = "workana" | "direct";
 
-export const SOURCE_CONFIG: Record<
-  Source,
+const KNOWN_CONFIG: Record<
+  KnownSource,
   { label: string; className: string; icon: React.ReactNode }
 > = {
   workana: {
@@ -26,9 +26,23 @@ export const SOURCE_CONFIG: Record<
   },
 };
 
-export const SourceBadge = ({ review }: { review: Review }) => {
+function getConfig(review: Review) {
   if (!review.source) return null;
-  const config = SOURCE_CONFIG[review.source];
+  if (review.source === "workana" || review.source === "direct") {
+    return KNOWN_CONFIG[review.source];
+  }
+  // custom or any unknown source
+  return {
+    label: review.sourceLabel ?? review.source,
+    className: "bg-[#111] text-slate-400 ring-1 ring-[#2a2a2a]",
+    icon: <UserIcon />,
+  };
+}
+
+export const SourceBadge = ({ review }: { review: Review }) => {
+  const config = getConfig(review);
+  if (!config) return null;
+
   const className = `inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${config.className}`;
 
   if (review.sourceUrl) {

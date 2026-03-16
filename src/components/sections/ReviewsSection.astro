@@ -3,73 +3,12 @@ import Container from "../layout/Container.astro";
 import ReviewsCarousel from "../ui/ReviewsCarousel.tsx";
 import { useTranslations } from "../../i18n/utils";
 import type { Locale } from "../../i18n/ui";
-
-const reviews = [
-  {
-    name: "Sarah Mitchell",
-    role: "Product Manager",
-    company: "TechFlow Inc.",
-    avatar: "SM",
-    rating: 5,
-    text: "Christian delivered an exceptional job. The product was built fast, the code was clean, and he communicated proactively throughout the whole process. Highly recommended!",
-    linkedinUrl: "https://linkedin.com",
-    source: "workana",
-    sourceUrl:
-      "https://www.workana.com/freelancer/29d6238ace2e92ebdcddbed3f81cab76",
-  },
-  {
-    name: "Alejandro Torres",
-    role: "Founder",
-    company: "Nova Studio",
-    avatar: "AT",
-    rating: 5,
-    text: "Working with Christian was a pleasure. He understood our vision immediately and translated it into a beautiful, performant web application. We'll definitely work together again.",
-    source: "direct",
-  },
-  {
-    name: "Emily Zhao",
-    role: "CTO",
-    company: "Stackly",
-    avatar: "EZ",
-    rating: 5,
-    text: "Impressive technical depth and attention to detail. Christian is one of those developers who actually reads the design specs carefully and follows best practices without being asked.",
-    linkedinUrl: "https://linkedin.com",
-    source: "workana",
-    sourceUrl:
-      "https://www.workana.com/freelancer/29d6238ace2e92ebdcddbed3f81cab76",
-  },
-  {
-    name: "Lucas Ferreira",
-    role: "Lead Designer",
-    company: "Pixel & Co.",
-    avatar: "LF",
-    rating: 5,
-    text: "As a designer, I appreciate developers who respect pixel-perfect implementations. Christian nailed every detail, and also brought useful suggestions to improve UX.",
-    source: "direct",
-  },
-  {
-    name: "Dana Park",
-    role: "Marketing Director",
-    company: "GrowthLoop",
-    avatar: "DP",
-    rating: 5,
-    text: "We hired Christian to rebuild our landing page and the results were outstanding. Conversion rate went up 40% and the page loads in under a second. Exceptional work.",
-    linkedinUrl: "https://linkedin.com",
-    source: "workana",
-  },
-  {
-    name: "Marco Bianchi",
-    role: "Software Engineer",
-    company: "DeepLogic",
-    avatar: "MB",
-    rating: 5,
-    text: "I collaborated with Christian on a complex dashboard project. His React and TypeScript skills are top-notch and he's also great at mentoring junior devs on the team.",
-    source: "direct",
-  },
-] as const;
+import { getReviews } from "../../lib/sanity";
 
 const { lang = "en" } = Astro.props as { lang?: Locale };
 const t = useTranslations(lang);
+
+const reviews = await getReviews(lang);
 ---
 
 <section id="reviews" class="py-24 bg-surface-alt overflow-hidden">

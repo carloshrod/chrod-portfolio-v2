@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ProjectCard } from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
-import type { Project } from "./project.types";
+import type { Project } from "../../types/project";
 import type { Locale } from "../../i18n/ui";
 
 export type { Project };

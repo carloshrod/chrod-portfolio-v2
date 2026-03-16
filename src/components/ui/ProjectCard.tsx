@@ -1,5 +1,5 @@
 import { CodeIcon, ExternalLinkIcon, GithubIcon, SearchIcon } from "./icons";
-import type { Project } from "./project.types";
+import type { Project } from "../../types/project";
 
 interface Props {
   project: Project;
