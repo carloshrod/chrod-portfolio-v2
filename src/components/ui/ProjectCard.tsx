@@ -74,7 +74,7 @@ export function ProjectCard({ project, onClick }: Props) {
       </p>
 
       <div className="flex flex-wrap gap-2">
-        {project.technologies.map((tech) => (
+        {project.techStack.map((tech) => (
           <span
             key={tech}
             className="rounded-md bg-[#13131f] px-2 py-1 text-xs font-medium text-slate-500 ring-1 ring-[#1c1c2e]"

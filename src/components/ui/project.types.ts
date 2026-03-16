@@ -7,8 +7,13 @@ export interface Project {
   title: string;
   description: string;
   longDescription?: string;
-  technologies: string[];
+  role?: string;
+  company?: string;
+  year?: string;
+  techStack: string[];
+  keyContributions?: string[];
   githubRepos?: GitHubRepo[];
   liveUrl?: string;
+  websiteUrl?: string;
   screenshots?: string[];
 }

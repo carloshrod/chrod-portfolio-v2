@@ -3,82 +3,12 @@ import Container from "../layout/Container.astro";
 import ProjectsGrid from "../ui/ProjectsGrid";
 import { useTranslations } from "../../i18n/utils";
 import type { Locale } from "../../i18n/ui";
+import { getProjects } from "../../lib/sanity";
 
 const { lang = "en" } = Astro.props as { lang?: Locale };
 const t = useTranslations(lang);
 
-const projects = [
-  {
-    title: "Project One",
-    description:
-      "A full-stack web application built with React and Node.js. Features JWT authentication, real-time data, and a modern UI.",
-    longDescription:
-      "A production-ready full-stack web application built with React on the frontend and Node.js with Express on the backend. It implements JWT-based authentication with refresh token rotation, real-time data sync via WebSockets, role-based access control, and a responsive modern UI built with TypeScript and Tailwind CSS. The PostgreSQL database uses optimized queries and connection pooling for high throughput.",
-    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-    githubRepos: [
-      { url: "https://github.com", label: "Frontend" },
-      { url: "https://github.com", label: "Backend" },
-    ],
-    liveUrl: "https://example.com",
-    screenshots: [],
-  },
-  {
-    title: "Project Two",
-    description:
-      "An e-commerce platform with a clean design, shopping cart, and payment integration powered by Next.js and Stripe.",
-    longDescription:
-      "A fully-featured e-commerce platform built with Next.js App Router and Stripe for payment processing. The platform supports product catalog management, a persistent shopping cart, secure checkout with Stripe Elements, order history, and an admin dashboard. MongoDB Atlas handles product and order data with Mongoose schemas, while Tailwind CSS ensures a polished, responsive storefront.",
-    technologies: ["Next.js", "Tailwind CSS", "Stripe", "MongoDB"],
-    githubRepos: [{ url: "https://github.com" }],
-    liveUrl: "https://example.com",
-    screenshots: [],
-  },
-  {
-    title: "Project Three",
-    description:
-      "A RESTful API built with Express and TypeScript. Includes full CRUD operations, input validation, and JWT auth.",
-    longDescription:
-      "A scalable RESTful API developed with Express and TypeScript following clean architecture principles. It covers full CRUD operations across multiple resources, request validation with Zod, JWT authentication and authorization middleware, rate limiting, and structured error handling. The MySQL database is managed with Prisma ORM, and the project includes comprehensive integration tests written with Jest and Supertest.",
-    technologies: ["Express", "TypeScript", "MySQL", "JWT"],
-    githubRepos: [{ url: "https://github.com" }],
-    screenshots: [],
-  },
-  {
-    title: "Project Four",
-    description:
-      "A real-time dashboard with React and Firebase, featuring live data visualization and push notifications.",
-    longDescription:
-      "A real-time analytics dashboard powered by React and Firebase Realtime Database. Data updates are streamed live to all connected clients without page refreshes. The dashboard features interactive charts built with Recharts, push notifications via Firebase Cloud Messaging, user presence indicators, and a dark-themed Material UI layout. Authentication is handled through Firebase Auth with Google OAuth support.",
-    technologies: ["React", "Firebase", "Material UI", "Recharts"],
-    githubRepos: [
-      { url: "https://github.com", label: "Frontend" },
-      { url: "https://github.com", label: "Backend" },
-    ],
-    liveUrl: "https://example.com",
-    screenshots: [],
-  },
-  {
-    title: "Project Five",
-    description:
-      "A component library built with Astro and Tailwind CSS, documented with Storybook and published to npm.",
-    longDescription:
-      "A headless-first component library containing 30+ accessible UI primitives built with Astro and Tailwind CSS. Each component follows WAI-ARIA patterns and is fully keyboard navigable. The library is documented with Storybook, includes visual regression tests with Chromatic, ships TypeScript types, and is distributed as a package on npm with both ESM and CJS outputs.",
-    technologies: ["Astro", "Tailwind CSS", "TypeScript", "Storybook"],
-    githubRepos: [{ url: "https://github.com" }],
-    screenshots: [],
-  },
-  {
-    title: "Project Six",
-    description:
-      "A portfolio and blog starter kit with Markdown-based content, full SEO optimization, and dark mode.",
-    longDescription:
-      "A performant portfolio and blog starter built with Astro and MDX. Content is authored in Markdown with frontmatter-driven metadata, while Astro's static rendering ensures near-perfect Lighthouse scores. Features include automatic OG image generation, an RSS feed, dark/light mode toggle, category filtering, and one-click deployment to Vercel. SCSS modules provide scoped styling where Tailwind utilities fall short.",
-    technologies: ["Astro", "SCSS", "MDX", "Vercel"],
-    githubRepos: [{ url: "https://github.com" }],
-    liveUrl: "https://example.com",
-    screenshots: [],
-  },
-];
+const projects = await getProjects(lang);
 ---
 
 <section id="projects" class="py-24">

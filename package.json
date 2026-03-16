@@ -11,13 +11,18 @@
   "dependencies": {
     "@astrojs/react": "^4.4.2",
     "@emailjs/browser": "^4.4.1",
+    "@sanity/astro": "^3.3.1",
+    "@sanity/client": "^7.17.0",
     "@tailwindcss/vite": "^4.2.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.17.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-is": "^19.2.4",
+    "sanity": "^5.16.0",
     "simple-icons": "^16.11.0",
+    "styled-components": "^6.3.11",
     "tailwindcss": "^4.2.1"
   }
 }

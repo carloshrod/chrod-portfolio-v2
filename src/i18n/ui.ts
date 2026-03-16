@@ -122,10 +122,18 @@ export const ui: Record<Locale, Record<string, string>> = {
     // Project Modal
     "modal.no_screenshots": "No screenshots available",
     "modal.about": "About the project",
-    "modal.tech": "Technologies",
+    "modal.role": "Role",
+    "modal.company": "Client / Company",
+    "modal.year": "Year",
+    "modal.tech": "Tech Stack",
+    "modal.contributions": "Key Contributions",
     "modal.github.default": "View on GitHub",
     "modal.live": "Live demo",
+    "modal.website": "Official website",
     "modal.close": "Close project details",
+    "modal.zoom": "Click to zoom screenshot",
+    "modal.zoom.label": "Screenshot zoomed view",
+    "modal.zoom.close": "Close zoomed view",
 
     // WhatsApp
     "whatsapp.label": "Contact me on WhatsApp",
@@ -257,10 +265,18 @@ export const ui: Record<Locale, Record<string, string>> = {
     // Project Modal
     "modal.no_screenshots": "Sin capturas disponibles",
     "modal.about": "Sobre el proyecto",
-    "modal.tech": "Tecnologías",
+    "modal.role": "Rol",
+    "modal.company": "Cliente / Empresa",
+    "modal.year": "Año",
+    "modal.tech": "Tech Stack",
+    "modal.contributions": "Contribuciones clave",
     "modal.github.default": "Ver en GitHub",
     "modal.live": "Ver demo",
+    "modal.website": "Sitio web oficial",
     "modal.close": "Cerrar detalles del proyecto",
+    "modal.zoom": "Clic para ampliar captura",
+    "modal.zoom.label": "Vista ampliada de la captura",
+    "modal.zoom.close": "Cerrar vista ampliada",
 
     // WhatsApp
     "whatsapp.label": "Contáctame por WhatsApp",
