@@ -78,7 +78,8 @@ const homeUrl = lang === "es" ? "/es" : "/";
   ) as HTMLAnchorElement | null;
   footerLogo?.addEventListener("click", (e) => {
     const href = footerLogo.getAttribute("href");
-    if (href && window.location.pathname === href) {
+    const normalize = (p: string) => p.replace(/\/$/, "") || "/";
+    if (href && normalize(window.location.pathname) === normalize(href)) {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
