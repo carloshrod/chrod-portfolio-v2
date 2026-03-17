@@ -6,14 +6,22 @@ import type { Locale } from "../i18n/ui";
 export interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
   lang?: Locale;
+  canonicalUrl?: string;
 }
 
 const {
   title = "CHRod - Web Developer",
-  description = "Full-stack developer portfolio showcasing projects, skills and experience.",
+  description = "Full-stack web developer specializing in React, Node.js & modern web technologies. Available for freelance projects — landing pages, web apps, e-commerce & API development.",
+  keywords = "web developer, full-stack developer, React, Node.js, freelance, portfolio, landing pages, web apps, e-commerce",
   lang = "en",
+  canonicalUrl,
 } = Astro.props;
+
+const siteUrl = "https://chrod.netlify.app";
+const canonical = canonicalUrl ?? `${siteUrl}${Astro.url.pathname}`;
+const ogImage = `${siteUrl}/chrod-logo.png`;
 ---
 
 <!doctype html>
@@ -22,8 +30,36 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Carlos Hernández - CHRod" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#06060c" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="en" href={siteUrl} />
+    <link rel="alternate" hreflang="es" href={`${siteUrl}/es`} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="CHRod - Web Developer" />
+    <meta property="og:site_name" content="CHRod" />
+    <meta property="og:locale" content={lang === "es" ? "es_CO" : "en_US"} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="icon" type="image/png" href="/chrod-logo.png" />
-    <link rel="icon" href="/chrod-logo.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
