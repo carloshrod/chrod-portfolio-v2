@@ -163,7 +163,7 @@ export const LinkedInIcon = () => (
       width="24"
       height="24"
       rx="4"
-      className="fill-slate-500 transition-colors group-hover/link:fill-[#0A66C2]"
+      className="fill-slate-500 transition-colors group-hover/link:fill-[#0A66C2] group-active/link:fill-[#0A66C2] [@media(hover:none)]:fill-[#0A66C2]"
     />
     <path
       d="M7.1 9.6h2.1v7.3H7.1V9.6ZM8.2 8.6a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4ZM10.7 9.6h2v1h.03c.28-.53.97-1.1 2-1.1 2.14 0 2.53 1.41 2.53 3.24v4.16h-2.1v-3.7c0-.88-.02-2.02-1.24-2.02-1.24 0-1.43.97-1.43 1.97v3.75h-2.1V9.6Z"

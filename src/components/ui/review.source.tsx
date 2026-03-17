@@ -52,7 +52,7 @@ export const SourceBadge = ({ review }: { review: Review }) => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`View review on ${config.label}`}
-        className={`${className} transition-opacity hover:opacity-80`}
+        className={`${className} transition-all group-hover/link:brightness-125 group-active/link:brightness-125 group-hover/link:scale-105 group-active/link:scale-105`}
       >
         {config.icon}
         {config.label}

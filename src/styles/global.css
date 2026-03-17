@@ -77,6 +77,12 @@
     background: #D52C3370;
   }
 
+  @media (hover: none) {
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background: #D52C3340;
+    }
+  }
+
   /* Override browser autofill background on dark theme */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
