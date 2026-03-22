@@ -138,6 +138,41 @@ export const ui: Record<Locale, Record<string, string>> = {
     // WhatsApp
     "whatsapp.label": "Contact me on WhatsApp",
 
+    // Review page
+    "review.badge": "Review",
+    "review.heading": "Leave a Review",
+    "review.subtitle":
+      "Share your experience working with me. Your feedback means a lot 🫶🏻",
+    "review.form.name": "Full Name",
+    "review.form.name.placeholder": "Your name",
+    "review.form.role": "Role / Position",
+    "review.form.role.placeholder": "e.g. CEO, Project Manager, CTO",
+    "review.form.company": "Company",
+    "review.form.company.placeholder": "Your company (optional)",
+    "review.form.text": "Your Review",
+    "review.form.text.placeholder":
+      "Tell others about your experience working with me\u2026",
+    "review.form.text.hint": "Minimum 50 characters",
+    "review.form.rating": "Rating",
+    "review.form.rating.hint":
+      "Optional \u2014 how would you rate the overall experience?",
+    "review.form.linkedin": "LinkedIn Profile",
+    "review.form.linkedin.placeholder":
+      "https://linkedin.com/in/yourprofile (optional)",
+    "review.form.submit": "Submit Review",
+    "review.form.submitting": "Submitting\u2026",
+    "review.success.heading": "Thank you!",
+    "review.success.body":
+      "Your review has been received and will be reviewed shortly. I really appreciate your feedback.",
+    "review.error": "Something went wrong. Please try again.",
+    "review.error.required": "This field is required.",
+    "review.error.text.short": "Please write at least 50 characters.",
+    "review.error.linkedin.invalid":
+      "Please enter a valid URL (starting with https://).",
+    "review.invalid.heading": "Invalid link",
+    "review.invalid.body":
+      "This link is invalid or has expired. Please ask for a new one.",
+
     // Legal pages
     "legal.back": "Back to home",
   },
@@ -280,6 +315,42 @@ export const ui: Record<Locale, Record<string, string>> = {
 
     // WhatsApp
     "whatsapp.label": "Contáctame por WhatsApp",
+
+    // Review page
+    "review.badge": "Rese\u00f1a",
+    "review.heading": "Deja tu Rese\u00f1a",
+    "review.subtitle":
+      "Comparte tu experiencia trabajando conmigo.\n Tu opini\u00f3n es muy valiosa 🫶🏻",
+    "review.form.name": "Nombre completo",
+    "review.form.name.placeholder": "Tu nombre",
+    "review.form.role": "Cargo / Posici\u00f3n",
+    "review.form.role.placeholder":
+      "ej. CEO, Gerente de Proyecto, Director de TI",
+    "review.form.company": "Empresa",
+    "review.form.company.placeholder": "Tu empresa (opcional)",
+    "review.form.text": "Tu rese\u00f1a",
+    "review.form.text.placeholder":
+      "Cu\u00e9ntale a otros sobre tu experiencia trabajando conmigo\u2026",
+    "review.form.text.hint": "M\u00ednimo 50 caracteres",
+    "review.form.rating": "Calificaci\u00f3n",
+    "review.form.rating.hint":
+      "Opcional \u2014 \u00bfc\u00f3mo calificar\u00edas la experiencia general?",
+    "review.form.linkedin": "Perfil de LinkedIn",
+    "review.form.linkedin.placeholder":
+      "https://linkedin.com/in/tuperfil (opcional)",
+    "review.form.submit": "Enviar Rese\u00f1a",
+    "review.form.submitting": "Enviando\u2026",
+    "review.success.heading": "\u00a1Gracias!",
+    "review.success.body":
+      "Tu rese\u00f1a ha sido recibida y ser\u00e1 revisada pronto. Agradezco mucho tu tiempo y opini\u00f3n.",
+    "review.error": "Algo sali\u00f3 mal. Por favor, int\u00e9ntalo de nuevo.",
+    "review.error.required": "Este campo es requerido.",
+    "review.error.text.short": "Por favor escribe al menos 50 caracteres.",
+    "review.error.linkedin.invalid":
+      "Por favor ingresa una URL v\u00e1lida (que comience con https://).",
+    "review.invalid.heading": "Enlace inv\u00e1lido",
+    "review.invalid.body":
+      "Este enlace es inv\u00e1lido o ha expirado. Por favor solicita uno nuevo.",
 
     // Legal pages
     "legal.back": "Volver al inicio",

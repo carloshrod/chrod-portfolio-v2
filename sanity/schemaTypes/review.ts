@@ -73,7 +73,30 @@ export const reviewSchema = defineType({
       type: "number",
       description: "Shown as stars — most relevant for Workana reviews",
       validation: (r) => r.min(1).max(5),
-      hidden: ({ document }) => document?.source !== "workana",
+      hidden: ({ document }) =>
+        document?.source !== "workana" && document?.source !== "direct",
+    }),
+    defineField({
+      name: "lang",
+      title: "Submission Language",
+      type: "string",
+      description: "Language in which the review was originally written",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Spanish", value: "es" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "en",
+    }),
+    defineField({
+      name: "published",
+      title: "Published",
+      type: "boolean",
+      description:
+        "Toggle on to show this review in the portfolio carousel. New submissions start unpublished.",
+      initialValue: false,
     }),
     defineField({
       name: "sourceUrl",
@@ -108,6 +131,9 @@ export const reviewSchema = defineType({
     },
   ],
   preview: {
-    select: { title: "name", subtitle: "company" },
+    select: { title: "name", subtitle: "company", media: "published" },
+    prepare({ title, subtitle }: { title: string; subtitle?: string }) {
+      return { title, subtitle };
+    },
   },
 });

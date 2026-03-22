@@ -17,7 +17,7 @@ const ReviewCard = ({ review }: { review: Review }) => {
     <>
       <figure className="group/link flex h-64 w-80 shrink-0 flex-col gap-5 rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-red-600/30">
         <div className="flex shrink-0 items-center justify-between">
-          {review.source === "workana" ? <StarRating /> : <span />}
+          {review.rating ? <StarRating /> : <span />}
           <SourceBadge review={review} />
         </div>
 

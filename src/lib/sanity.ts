@@ -73,7 +73,7 @@ export async function getReviews(lang: "en" | "es" = "en"): Promise<Review[]> {
 
   const raw = await sanityClient.fetch<Review[]>(
     `
-    *[_type == "review"] | order(order asc) {
+    *[_type == "review" && published != false] | order(order asc) {
       name,
       "role": select(
         $isEs && defined(roleEs) => roleEs,
