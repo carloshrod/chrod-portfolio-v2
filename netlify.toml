@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://chrod.netlify.app/*"
+  to = "https://chrod.dev/:splat"
+  status = 301
+  force = true
