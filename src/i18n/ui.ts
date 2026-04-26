@@ -198,9 +198,9 @@ export const ui: Record<Locale, Record<string, string>> = {
     "about.label": "Sobre mí",
     "about.heading": "Apasionado por crear experiencias web increíbles",
     "about.p1":
-      "Soy desarrollador un full-stack con enfoque fuerte en frontend. Me gusta construir interfaces rápidas, accesibles y bien diseñadas utilizando herramientas y frameworks modernos.",
+      "Soy desarrollador full-stack con enfoque en frontend. Me gusta construir interfaces rápidas, accesibles y bien diseñadas utilizando herramientas y frameworks modernos.",
     "about.p2":
-      "Disfruto trabajar en todo el stack: desde diseñar componentes de UI limpios y funcionales, hasta conectar APIs y gestionar bases de datos. Siempre busco escribir código limpio, crear proyectos fáciles de mantener y desarrollar productos que realmente aporten valor.",
+      "Disfruto involucrarme en diferentes etapas del desarrollo: desde diseñar componentes de UI limpios y funcionales, hasta conectar APIs y gestionar bases de datos. Siempre busco escribir código limpio, crear proyectos fáciles de mantener y desarrollar productos que realmente aporten valor.",
     "about.p3":
       "Cuando no estoy programando, exploro nuevas tecnologías y sigo desarrollando mi criterio de diseño.",
     "about.stat1.label": "Años de experiencia",
