@@ -3,6 +3,7 @@ import MainLayout from "../../../layouts/MainLayout.astro";
 import Navbar from "../../layout/Navbar.astro";
 import Footer from "../../layout/Footer.astro";
 import ContactDrawer from "../../ui/ContactDrawer.tsx";
+import TravelingGlow from "../../ui/TravelingGlow.astro";
 import ServicesOverviewHero from "./ServicesOverviewHero.astro";
 import ServicesOverviewSelector from "./ServicesOverviewSelector.astro";
 import ServicesOverviewGrid from "./ServicesOverviewGrid.astro";
@@ -29,11 +30,13 @@ const alternates = getAlternatePaths("services");
 >
   <Navbar lang={lang} alternates={alternates} />
   <main>
-    <ServicesOverviewHero lang={lang} />
-    <ServicesOverviewSelector lang={lang} />
-    <ServicesOverviewGrid lang={lang} />
-    <ServicesOverviewComparison lang={lang} />
-    <ServicesOverviewCTA lang={lang} />
+    <TravelingGlow>
+      <ServicesOverviewHero lang={lang} />
+      <ServicesOverviewSelector lang={lang} />
+      <ServicesOverviewGrid lang={lang} />
+      <ServicesOverviewComparison lang={lang} />
+      <ServicesOverviewCTA lang={lang} />
+    </TravelingGlow>
   </main>
   <Footer lang={lang} />
   <ContactDrawer client:load lang={lang} />

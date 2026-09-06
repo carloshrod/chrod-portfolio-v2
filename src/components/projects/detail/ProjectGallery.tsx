@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { CloseIcon, SearchIcon } from "../../ui/icons";
 import { useTranslations } from "../../../i18n/utils";
 import type { Locale } from "../../../i18n/ui";
@@ -52,6 +53,10 @@ export default function ProjectGallery({ project, lang = "en" }: Props) {
   const screenshots = project.screenshots ?? [];
   const [active, setActive] = useState(0);
   const [zoomed, setZoomed] = useState(false);
+  // The zoom overlay is rendered through a portal (see below), which needs
+  // a real document — so it only mounts on the client.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   if (screenshots.length === 0 && !project.videoUrl) return null;
 
@@ -161,59 +166,68 @@ export default function ProjectGallery({ project, lang = "en" }: Props) {
         </div>
       )}
 
-      {zoomed && screenshots.length > 0 && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={t("project.page.gallery.zoom.label")}
-          className="fixed inset-0 z-60 flex items-center justify-center bg-black/90 cursor-zoom-out"
-          onClick={() => setZoomed(false)}
-        >
-          <button
-            type="button"
-            aria-label={t("project.page.gallery.zoom.close")}
-            className="absolute right-4 top-4 rounded-md p-1.5 text-slate-400 transition-colors hover:bg-[#222] hover:text-slate-200 cursor-pointer"
+      {/* Rendered into document.body so the overlay is always positioned
+          against the viewport. In place, any ancestor with a transform,
+          filter, clip-path or containment would silently become its
+          containing block and misplace/clip it — this gallery sits inside
+          decorated page wrappers, so that is a live risk. */}
+      {mounted &&
+        zoomed &&
+        screenshots.length > 0 &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={t("project.page.gallery.zoom.label")}
+            className="fixed inset-0 z-60 flex items-center justify-center bg-black/90 cursor-zoom-out"
             onClick={() => setZoomed(false)}
           >
-            <CloseIcon />
-          </button>
+            <button
+              type="button"
+              aria-label={t("project.page.gallery.zoom.close")}
+              className="absolute right-4 top-4 rounded-md p-1.5 text-slate-400 transition-colors hover:bg-[#222] hover:text-slate-200 cursor-pointer"
+              onClick={() => setZoomed(false)}
+            >
+              <CloseIcon />
+            </button>
 
-          {hasMultiple && (
-            <>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goPrev();
-                }}
-                aria-label="Previous screenshot"
-                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80 cursor-pointer sm:left-4"
-              >
-                <PrevArrowIcon />
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  goNext();
-                }}
-                aria-label="Next screenshot"
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80 cursor-pointer sm:right-4"
-              >
-                <NextArrowIcon />
-              </button>
-            </>
-          )}
+            {hasMultiple && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
+                  aria-label="Previous screenshot"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80 cursor-pointer sm:left-4"
+                >
+                  <PrevArrowIcon />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                  aria-label="Next screenshot"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80 cursor-pointer sm:right-4"
+                >
+                  <NextArrowIcon />
+                </button>
+              </>
+            )}
 
-          <img
-            src={screenshots[active]}
-            alt="Screenshot zoomed"
-            className="max-h-[90vh] max-w-[95vw] rounded-xl object-contain shadow-2xl"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      )}
+            <img
+              src={screenshots[active]}
+              alt="Screenshot zoomed"
+              className="max-h-[90vh] max-w-[95vw] rounded-xl object-contain shadow-2xl"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

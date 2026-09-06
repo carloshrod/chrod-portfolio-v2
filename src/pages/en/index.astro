@@ -9,6 +9,7 @@ import ProjectsSection from "../../components/sections/ProjectsSection.astro";
 import ReviewsSection from "../../components/sections/ReviewsSection.astro";
 import ContactSection from "../../components/sections/ContactSection.astro";
 import ContactDrawer from "../../components/ui/ContactDrawer.tsx";
+import TravelingGlow from "../../components/ui/TravelingGlow.astro";
 ---
 
 <MainLayout
@@ -19,12 +20,19 @@ import ContactDrawer from "../../components/ui/ContactDrawer.tsx";
 >
   <Navbar lang="en" />
   <main>
+    <!-- The hero keeps its own glow blobs and floating glyphs, so it stays out
+         of the travelling glow's run rather than stacking a second light on
+         top of them. Nothing is lost visually: the section right below it is
+         opaque (bg-surface-alt), so the glow is hidden there anyway and only
+         surfaces once it reaches the first dark section. -->
     <HeroSection lang="en" />
-    <AboutSection lang="en" />
-    <ServicesSection lang="en" />
-    <ProjectsSection lang="en" />
-    <ReviewsSection lang="en" />
-    <ContactSection lang="en" />
+    <TravelingGlow>
+      <AboutSection lang="en" />
+      <ServicesSection lang="en" />
+      <ProjectsSection lang="en" />
+      <ReviewsSection lang="en" />
+      <ContactSection lang="en" />
+    </TravelingGlow>
   </main>
   <Footer lang="en" />
   <!-- ContactDrawer rendered once at root level, opened via CustomEvent -->

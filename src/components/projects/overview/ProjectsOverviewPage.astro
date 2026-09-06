@@ -3,6 +3,7 @@ import MainLayout from "../../../layouts/MainLayout.astro";
 import Navbar from "../../layout/Navbar.astro";
 import Footer from "../../layout/Footer.astro";
 import ContactDrawer from "../../ui/ContactDrawer.tsx";
+import TravelingGlow from "../../ui/TravelingGlow.astro";
 import ProjectsOverviewHero from "./ProjectsOverviewHero.astro";
 import ProjectsOverviewGrid from "./ProjectsOverviewGrid.astro";
 import ProjectsOverviewCTA from "./ProjectsOverviewCTA.astro";
@@ -30,9 +31,11 @@ const projects = await getProjects(lang);
 >
   <Navbar lang={lang} alternates={alternates} />
   <main>
-    <ProjectsOverviewHero lang={lang} />
-    <ProjectsOverviewGrid projects={projects} lang={lang} />
-    <ProjectsOverviewCTA lang={lang} />
+    <TravelingGlow>
+      <ProjectsOverviewHero lang={lang} />
+      <ProjectsOverviewGrid projects={projects} lang={lang} />
+      <ProjectsOverviewCTA lang={lang} />
+    </TravelingGlow>
   </main>
   <Footer lang={lang} />
   <ContactDrawer client:load lang={lang} />

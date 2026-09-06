@@ -3,6 +3,7 @@ import MainLayout from "../../../layouts/MainLayout.astro";
 import Navbar from "../../layout/Navbar.astro";
 import Footer from "../../layout/Footer.astro";
 import ContactDrawer from "../../ui/ContactDrawer.tsx";
+import TravelingGlow from "../../ui/TravelingGlow.astro";
 import ProjectHero from "./ProjectHero.astro";
 import ProjectShowcase from "./ProjectShowcase.astro";
 import ProjectOverview from "./ProjectOverview.astro";
@@ -33,13 +34,15 @@ const alternates = getAlternatePaths("projects", project.slugs);
 >
   <Navbar lang={lang} alternates={alternates} />
   <main>
-    <ProjectHero project={project} lang={lang} />
-    <ProjectShowcase project={project} lang={lang} />
-    <ProjectOverview project={project} lang={lang} />
-    <ProjectContributions project={project} lang={lang} />
-    <ProjectTestimonial project={project} lang={lang} />
-    <ProjectFinalCTA lang={lang} />
-    <ProjectRelatedServices project={project} lang={lang} />
+    <TravelingGlow>
+      <ProjectHero project={project} lang={lang} />
+      <ProjectShowcase project={project} lang={lang} />
+      <ProjectOverview project={project} lang={lang} />
+      <ProjectContributions project={project} lang={lang} />
+      <ProjectTestimonial project={project} lang={lang} />
+      <ProjectFinalCTA lang={lang} />
+      <ProjectRelatedServices project={project} lang={lang} />
+    </TravelingGlow>
   </main>
   <Footer lang={lang} />
   <ProjectStickyCTA lang={lang} />

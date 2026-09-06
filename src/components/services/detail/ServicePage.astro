@@ -3,6 +3,7 @@ import MainLayout from "../../../layouts/MainLayout.astro";
 import Navbar from "../../layout/Navbar.astro";
 import Footer from "../../layout/Footer.astro";
 import ContactDrawer from "../../ui/ContactDrawer.tsx";
+import TravelingGlow from "../../ui/TravelingGlow.astro";
 import ServiceHero from "./ServiceHero.astro";
 import ServiceProblemSolution from "./ServiceProblemSolution.astro";
 import ServiceIncludes from "./ServiceIncludes.astro";
@@ -35,15 +36,17 @@ const alternates = getAlternatePaths("services", service.slug);
 >
   <Navbar lang={lang} alternates={alternates} />
   <main>
-    <ServiceHero service={service} lang={lang} />
-    <ServiceProblemSolution service={service} lang={lang} />
-    <ServiceIncludes service={service} lang={lang} />
-    <ServiceProcess service={service} lang={lang} />
-    <ServiceTechStack service={service} lang={lang} />
-    <ServiceRelatedProjects service={service} lang={lang} />
-    <ServiceFAQ service={service} lang={lang} />
-    <ServiceQuoteForm service={service} lang={lang} client:load />
-    <ServiceExploreMoreCTA lang={lang} />
+    <TravelingGlow>
+      <ServiceHero service={service} lang={lang} />
+      <ServiceProblemSolution service={service} lang={lang} />
+      <ServiceIncludes service={service} lang={lang} />
+      <ServiceProcess service={service} lang={lang} />
+      <ServiceTechStack service={service} lang={lang} />
+      <ServiceRelatedProjects service={service} lang={lang} />
+      <ServiceFAQ service={service} lang={lang} />
+      <ServiceQuoteForm service={service} lang={lang} client:load />
+      <ServiceExploreMoreCTA lang={lang} />
+    </TravelingGlow>
   </main>
   <Footer lang={lang} />
   <ServiceStickyCTA lang={lang} />

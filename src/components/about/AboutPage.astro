@@ -3,6 +3,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import Navbar from "../layout/Navbar.astro";
 import Footer from "../layout/Footer.astro";
 import ContactDrawer from "../ui/ContactDrawer.tsx";
+import TravelingGlow from "../ui/TravelingGlow.astro";
 import AboutHero from "./AboutHero.astro";
 import AboutIntro from "./AboutIntro.astro";
 import AboutProcess from "./AboutProcess.astro";
@@ -30,12 +31,14 @@ const alternates = getAlternatePaths("about");
 >
   <Navbar lang={lang} alternates={alternates} />
   <main>
-    <AboutHero lang={lang} />
-    <AboutIntro lang={lang} />
-    <AboutProcess lang={lang} />
-    <AboutFocus lang={lang} />
-    <SkillsSection lang={lang} />
-    <AboutCTA lang={lang} />
+    <TravelingGlow>
+      <AboutHero lang={lang} />
+      <AboutIntro lang={lang} />
+      <AboutProcess lang={lang} />
+      <AboutFocus lang={lang} />
+      <SkillsSection lang={lang} />
+      <AboutCTA lang={lang} />
+    </TravelingGlow>
   </main>
   <Footer lang={lang} />
   <ContactDrawer client:load lang={lang} />
