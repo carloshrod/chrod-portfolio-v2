@@ -342,7 +342,7 @@ const ServiceQuoteForm = ({ service, lang }: Props) => {
   }
 
   return (
-    <section id="service-quote-form" className="px-4 py-20 sm:px-6 lg:px-8">
+    <section id="service-quote-form" className="px-4 py-20 sm:px-6 lg:px-8 bg-surface-alt">
       <div className="mx-auto max-w-2xl">
         <div className="mb-8 text-center" data-scroll-animate="up">
           <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-alt px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wide text-red-400">

@@ -15,13 +15,13 @@ const StarRating = () => (
 const ReviewCard = ({ review }: { review: Review }) => {
   return (
     <>
-      <figure className="flex h-64 w-80 shrink-0 flex-col gap-5 rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-red-600/30">
+      <figure className="group flex h-64 w-80 shrink-0 flex-col gap-5 rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-red-600/30">
         <div className="flex shrink-0 items-center justify-between">
           {review.rating ? <StarRating /> : <span />}
           <SourceBadge review={review} />
         </div>
 
-        <blockquote className="scrollbar-thin flex-1 overflow-y-auto">
+        <blockquote className="scrollbar-thin flex-1 overflow-y-hidden group-hover:overflow-y-auto">
           <p className="text-sm leading-relaxed text-slate-400">
             &ldquo;{review.text}&rdquo;
           </p>
