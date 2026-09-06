@@ -1,0 +1,125 @@
+---
+/**
+ * Wraps a run of page sections with a single glow that travels down behind
+ * them as the page scrolls, instead of every dark section carrying its own
+ * static one. Put it around consecutive sections only.
+ *
+ * The clipping that keeps the glow inside the run is done by a dedicated
+ * layer that holds nothing but the glow, never by the wrapper itself. That
+ * matters: `overflow-hidden` on the wrapper would turn it into a scroll
+ * container and break `position: sticky` children (ProjectShowcase's
+ * sidebar), and `clip-path` on it would make it the containing block for
+ * `position: fixed` children, misplacing full-screen overlays
+ * (ProjectGallery's zoom). Clipping a layer that wraps no page content has
+ * neither effect, so sections can be added to a run without checking what
+ * they position inside — and the clip is also what keeps the glow from
+ * widening the page on narrow viewports.
+ */
+---
+
+<div class="relative isolate" data-glow-track>
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+    aria-hidden="true"
+  >
+    <div
+      data-travel-glow
+      class="absolute left-1/2 top-0 h-125 w-150 will-change-transform"
+      style="transform: translate(-50%, -50%) translateY(var(--glow-center, 85px)); background: radial-gradient(ellipse at center, rgba(220,38,38,0.1) 0%, rgba(220,38,38,0.04) 40%, transparent 70%);"
+    >
+    </div>
+  </div>
+  <slot />
+</div>
+
+<script>
+  // The glow's layer sits behind every section in the wrapper (-z-10; the
+  // wrapper is `isolate` so that negative z-index stays scoped to it).
+  // Sections painting an opaque background (bg-surface-alt) occlude it as it
+  // passes behind them and it reappears over the transparent dark ones, so
+  // "which sections light up" needs no per-section logic.
+  //
+  // With no JS, or under reduced motion, the glow simply stays put at START
+  // instead of travelling — the CSS fallback in the markup — so the page is
+  // never left without it.
+  const START = 85;
+  const GLOW_HALF = 250; // half of h-125, i.e. the glow's own radius
+
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let glowAbort: AbortController | undefined;
+
+  function initTravelingGlow() {
+    glowAbort?.abort();
+    glowAbort = undefined;
+
+    const track = document.querySelector<HTMLElement>("[data-glow-track]");
+    const glow = document.querySelector<HTMLElement>("[data-travel-glow]");
+    if (!track || !glow) return;
+
+    if (motionQuery.matches) {
+      // Drop any position left over from a previous run so the glow falls
+      // back to its resting spot rather than freezing at a stale offset.
+      glow.style.removeProperty("--glow-center");
+      return;
+    }
+
+    glowAbort = new AbortController();
+    const { signal } = glowAbort;
+
+    let rafId: number | null = null;
+
+    function apply() {
+      rafId = null;
+      const rect = track!.getBoundingClientRect();
+      const viewport = window.innerHeight;
+      const scrollable = rect.height - viewport;
+
+      // Nothing to travel across: a wrapper shorter than the viewport has no
+      // scroll range of its own, and dividing by it would snap the glow to
+      // the end of its run on the first pixel of scroll.
+      if (scrollable <= 0) {
+        glow!.style.setProperty("--glow-center", `${START}px`);
+        return;
+      }
+
+      // --glow-center is the glow's centre measured from the top of the
+      // wrapper: the scroll offset plus a drift term. Adding the drift on top
+      // of the scroll (instead of taking a fraction of it) is what makes the
+      // glow outrun the page, so it stays on screen the whole way down while
+      // still moving against the content; a fraction makes it fall behind and
+      // leave through the top. `onScreen` is literally where it sits in the
+      // viewport: from START down to one glow-radius above the bottom edge.
+      // One monotone function of scroll, so it can neither jump nor park
+      // mid-run — and ending a radius short means the clamp below only ever
+      // bites once the run is genuinely over.
+      const scrolled = Math.max(0, -rect.top);
+      const progress = Math.min(scrolled / scrollable, 1);
+      const travel = Math.max(0, viewport - GLOW_HALF - START);
+      const onScreen = START + travel * progress;
+
+      // End the run at the wrapper's bottom edge instead of letting the glow
+      // keep tracking the scroll behind the sections that follow it.
+      const center = Math.min(scrolled + onScreen, rect.height - GLOW_HALF);
+
+      glow!.style.setProperty("--glow-center", `${center.toFixed(1)}px`);
+    }
+
+    function schedule() {
+      if (rafId === null) rafId = requestAnimationFrame(apply);
+    }
+
+    window.addEventListener("scroll", schedule, { passive: true, signal });
+    window.addEventListener("resize", schedule, { passive: true, signal });
+    apply();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTravelingGlow);
+  } else {
+    initTravelingGlow();
+  }
+  document.addEventListener("astro:page-load", initTravelingGlow);
+  // Re-evaluate if the OS setting is toggled while the page is open, in both
+  // directions, rather than leaving whatever state load time happened to see.
+  motionQuery.addEventListener("change", initTravelingGlow);
+</script>
